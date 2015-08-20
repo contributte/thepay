@@ -1,0 +1,33 @@
+{
+	"name": "trejjam/thepay",
+	"description": "The pay library nette extension",
+	"keywords": [
+		"the pay",
+		"nette",
+		"extension"
+	],
+	"license": [
+		"MIT"
+	],
+	"require": {
+		"php": ">=5.4",
+		"trejjam/thepay-lib": "dev-namespaces",
+		"nette/di": "~2.3"
+	},
+	"require-dev": {
+		"nette/tester": "@dev"
+	},
+	"autoload": {
+		"psr-4": {
+			"Trejjam\\ThePay\\": "src/"
+		},
+		"classmap": [
+			"src/exceptions.php"
+		]
+	},
+	"extra": {
+		"branch-alias": {
+			"dev-master": "v0.5.x-dev"
+		}
+	}
+}
