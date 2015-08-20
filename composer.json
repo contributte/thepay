@@ -12,7 +12,8 @@
 	"require": {
 		"php": ">=5.4",
 		"trejjam/thepay-lib": "dev-namespaces",
-		"nette/di": "~2.3"
+		"nette/di": "~2.3",
+		"nette/application": "~2.3"
 	},
 	"require-dev": {
 		"nette/tester": "@dev"
