@@ -45,10 +45,6 @@ class ThePayExtension extends Nette\DI\CompilerExtension
 
 		$classesDefinition = [
 			'merchantConfig'       => 'Tp\MerchantConfig',
-			'payment'              => 'Trejjam\ThePay\Payment',
-			'permanentPayment'     => 'Trejjam\ThePay\PermanentPayment',
-			'returnedPayment'      => 'Trejjam\ThePay\ReturnedPayment',
-			'helper.radioMerchant' => 'Tp\Helper\RadioMerchant',
 		];
 		$factoriesDefinition = [
 			'paymentFactory'              => 'Trejjam\ThePay\IPayment',
