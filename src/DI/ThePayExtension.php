@@ -9,11 +9,12 @@
 namespace Trejjam\ThePay\DI;
 
 use Nette,
-	Tp;
+	Tp,
+	Trejjam;
 
-class ThePayExtension extends Nette\DI\CompilerExtension
+class ThePayExtension extends Trejjam\BaseExtension\DI\BaseExtension
 {
-	protected $defaults = [
+	protected $default = [
 		'demo'     => TRUE,
 		'merchant' => [
 			'gateUrl'             => 'https://www.thepay.cz/gate/',
@@ -36,74 +37,50 @@ class ThePayExtension extends Nette\DI\CompilerExtension
 		'dataWebServicesWsdl' => 'https://www.thepay.cz/demo-gate/api/data-demo.wsdl',
 	];
 
-	public function loadConfiguration()
-	{
-		parent::loadConfiguration();
+	protected $classesDefinition = [
+		'merchantConfig' => 'Tp\MerchantConfig',
+		'helper.dataApi' => 'Trejjam\ThePay\Helper\DataApi',
+	];
 
-		$builder = $this->getContainerBuilder();
-		$config = $this->createConfig();
-
-		$classesDefinition = [
-			'merchantConfig' => 'Tp\MerchantConfig',
-			'helper.dataApi' => 'Trejjam\ThePay\Helper\DataApi',
-		];
-
-		$factoriesDefinition = [
-			'paymentFactory'              => 'Trejjam\ThePay\IPayment',
-			'permanentPaymentFactory'     => 'Trejjam\ThePay\IPermanentPayment',
-			'returnedPaymentFactory'      => 'Trejjam\ThePay\IReturnedPayment',
-			'helper.radioMerchantFactory' => 'Trejjam\ThePay\Helper\IRadioMerchant',
-		];
-
-		/** @var Nette\DI\ServiceDefinition[] $classes */
-		$classes = [];
-
-		foreach ($classesDefinition as $k => $v) {
-			$classes[$k] = $builder->addDefinition($this->prefix($k))
-								   ->setClass($v);
-		}
-
-		/** @var Nette\DI\ServiceDefinition[] $factories */
-		$factories = [];
-
-		foreach ($factoriesDefinition as $k => $v) {
-			$factories[$k] = $builder->addDefinition($this->prefix($k))
-									 ->setImplement($v);
-		}
-	}
+	protected $factoriesDefinition = [
+		'paymentFactory'              => 'Trejjam\ThePay\IPayment',
+		'permanentPaymentFactory'     => 'Trejjam\ThePay\IPermanentPayment',
+		'returnedPaymentFactory'      => 'Trejjam\ThePay\IReturnedPayment',
+		'helper.radioMerchantFactory' => 'Trejjam\ThePay\Helper\IRadioMerchant',
+	];
 
 	public function beforeCompile()
 	{
 		parent::beforeCompile();
 
-		$builder = $this->getContainerBuilder();
 		$config = $this->createConfig();
 		$merchantConfig = $config['merchant'];
 
-		$builder->getDefinition($this->prefix('merchantConfig'))
-				->addSetup(
-					'$service->gateUrl = ?;' . "\n" .
-					'$service->merchantId = ?;' . "\n" .
-					'$service->accountId = ?;' . "\n" .
-					'$service->password = ?;' . "\n" .
-					'$service->dataApiPassword = ?;' . "\n" .
-					'$service->webServicesWsdl = ?;' . "\n" .
-					'$service->dataWebServicesWsdl = ?',
-					[
-						$merchantConfig['gateUrl'],
-						$merchantConfig['merchantId'],
-						$merchantConfig['accountId'],
-						$merchantConfig['password'],
-						$merchantConfig['dataApiPassword'],
-						$merchantConfig['webServicesWsdl'],
-						$merchantConfig['dataWebServicesWsdl'],
-					]);
+		$classes = $this->getClasses();
+
+		$classes['merchantConfig']
+			->addSetup(
+				'$service->gateUrl = ?;' . "\n" .
+				'$service->merchantId = ?;' . "\n" .
+				'$service->accountId = ?;' . "\n" .
+				'$service->password = ?;' . "\n" .
+				'$service->dataApiPassword = ?;' . "\n" .
+				'$service->webServicesWsdl = ?;' . "\n" .
+				'$service->dataWebServicesWsdl = ?',
+				[
+					$merchantConfig['gateUrl'],
+					$merchantConfig['merchantId'],
+					$merchantConfig['accountId'],
+					$merchantConfig['password'],
+					$merchantConfig['dataApiPassword'],
+					$merchantConfig['webServicesWsdl'],
+					$merchantConfig['dataWebServicesWsdl'],
+				]);
 	}
 
 	protected function createConfig()
 	{
-		$config = $this->getConfig($this->defaults);
-		Nette\Utils\Validators::assert($config, 'array');
+		$config = parent::createConfig();
 		if ($config['demo']) {
 			$config['merchant'] = $this->merchantDemo;
 		}

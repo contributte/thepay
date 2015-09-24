@@ -21,7 +21,7 @@ class DataApi
 	{
 		$this->config = $config;
 	}
-	
+
 	/**
 	 * @param bool $onlyActive
 	 * @return Tp\DataApi\GetPaymentMethodsResponse
