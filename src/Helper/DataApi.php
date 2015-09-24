@@ -15,6 +15,9 @@ use Nette,
 
 class DataApi
 {
+	/**
+	 * @var Tp\MerchantConfig
+	 */
 	protected $config;
 
 	function __construct(Tp\MerchantConfig $config)
@@ -29,6 +32,55 @@ class DataApi
 	public function getPaymentMethods($onlyActive = TRUE)
 	{
 		return Tp\Helper\DataApi::getPaymentMethods($this->config, $onlyActive);
+	}
+
+	/**
+	 * @param Tp\DataApi\MerchantAccountMethod $method
+	 * @return null|string
+	 */
+	public function getPaymentMethodIcon(Tp\DataApi\MerchantAccountMethod $method)
+	{
+		switch ($method->getName()) {
+			case 'Platba kartou':
+				$file = 'muzo';
+				break;
+			case 'Platba 24':
+				$file = 'platba24';
+				break;
+			case 'MojePlatba':
+				$file = 'moje-platba';
+				break;
+			case 'eKonto':
+				$file = 'ekonto';
+				break;
+			case 'mPeníze':
+				$file = 'mpenize';
+				break;
+			case 'Ge Money':
+				$file = 'gemoney';
+				break;
+			case 'ČSOB':
+				$file = 'csob';
+				break;
+			case 'Fio banka':
+				$file = 'fio';
+				break;
+			case 'Jiná banka':
+				$file = 'transfer';
+				break;
+			case 'SuperCash':
+				$file = 'super-cash';
+				break;
+			case 'FerBuy':
+				$file = 'ferbuy';
+				break;
+
+			default:
+
+				return NULL;
+		}
+
+		return $this->config->gateUrl . 'radiobuttons/style/icons/' . $file . '.png';
 	}
 
 	/**
