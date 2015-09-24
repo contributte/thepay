@@ -44,8 +44,10 @@ class ThePayExtension extends Nette\DI\CompilerExtension
 		$config = $this->createConfig();
 
 		$classesDefinition = [
-			'merchantConfig'       => 'Tp\MerchantConfig',
+			'merchantConfig' => 'Tp\MerchantConfig',
+			'helper.dataApi' => 'Trejjam\ThePay\Helper\DataApi',
 		];
+
 		$factoriesDefinition = [
 			'paymentFactory'              => 'Trejjam\ThePay\IPayment',
 			'permanentPaymentFactory'     => 'Trejjam\ThePay\IPermanentPayment',
