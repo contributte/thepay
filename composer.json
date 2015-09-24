@@ -14,7 +14,9 @@
 		"trejjam/thepay-lib": "dev-namespaces#a0040b6",
 		"trejjam/base-extension": "~0.5.0",
 		"nette/di": "~2.3",
-		"nette/application": "~2.3"
+		"nette/application": "~2.3",
+
+		"ext-soap": "*"
 	},
 	"require-dev": {
 		"nette/tester": "@dev"
