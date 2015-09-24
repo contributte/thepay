@@ -36,51 +36,14 @@ class DataApi
 
 	/**
 	 * @param Tp\DataApi\MerchantAccountMethod $method
+	 * @param string(tight|209x127|86x86)      $type
 	 * @return null|string
 	 */
-	public function getPaymentMethodIcon(Tp\DataApi\MerchantAccountMethod $method)
+	public function getPaymentMethodIcon(Tp\DataApi\MerchantAccountMethod $method, $type = 'tight')
 	{
-		switch ($method->getName()) {
-			case 'Platba kartou':
-				$file = 'muzo';
-				break;
-			case 'Platba 24':
-				$file = 'platba24';
-				break;
-			case 'MojePlatba':
-				$file = 'moje-platba';
-				break;
-			case 'eKonto':
-				$file = 'ekonto';
-				break;
-			case 'mPeníze':
-				$file = 'mpenize';
-				break;
-			case 'Ge Money':
-				$file = 'gemoney';
-				break;
-			case 'ČSOB':
-				$file = 'csob';
-				break;
-			case 'Fio banka':
-				$file = 'fio';
-				break;
-			case 'Jiná banka':
-				$file = 'transfer';
-				break;
-			case 'SuperCash':
-				$file = 'super-cash';
-				break;
-			case 'FerBuy':
-				$file = 'ferbuy';
-				break;
-
-			default:
-
-				return NULL;
-		}
-
-		return $this->config->gateUrl . 'radiobuttons/style/icons/' . $file . '.png';
+		return Nette\Utils\Strings::replace($this->config->gateUrl, [
+			'~/demo-~' => '/',
+		]) . 'images/logos/public/' . $type . '/' . $method->getId() . '.png';
 	}
 
 	/**
