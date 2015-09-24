@@ -26,6 +26,7 @@ class Payment extends Tp\Payment
 
 		$this->linkGenerator = $linkGenerator;
 	}
+
 	public function setReturnUrl($returnUrl, $params = [])
 	{
 		if (preg_match('~^([\w:]+):(\w*+)(#.*)?()\z~', $returnUrl)) {
@@ -33,5 +34,14 @@ class Payment extends Tp\Payment
 		}
 
 		parent::setReturnUrl($returnUrl);
+	}
+
+	public function redirectOnlinePayment(Nette\Application\UI\Presenter $presenter)
+	{
+		$queryArgs = $this->getArgs();
+		$queryArgs['signature'] = $this->getSignature();
+		$url = $this->getMerchantConfig()->gateUrl . '?' . http_build_query($queryArgs);
+
+		$presenter->redirectUrl($url);
 	}
 }
