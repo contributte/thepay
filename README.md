@@ -1,6 +1,7 @@
 ThePay
 ======
 
+[![Latest stable](https://img.shields.io/packagist/v/trejjam/thepay.svg)](https://packagist.org/packages/trejjam/thepay)
 
 Installation
 ------------
@@ -8,7 +9,7 @@ Installation
 The best way to install trejjam/thepay is using  [Composer](http://getcomposer.org/):
 
 ```sh
-$ composer require trejjam/thepay:0.4
+$ composer require trejjam/thepay
 ```
 
 Configuration
