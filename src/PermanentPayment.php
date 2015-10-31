@@ -71,6 +71,7 @@ class PermanentPayment extends Tp\PermanentPayment
 
 		return parent::getSignature();
 	}
+
 	public function getSignatureLite()
 	{
 		$this->getMerchantData();

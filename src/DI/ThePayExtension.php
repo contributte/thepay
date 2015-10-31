@@ -22,7 +22,7 @@ class ThePayExtension extends Trejjam\BaseExtension\DI\BaseExtension
 			'accountId'           => '',
 			'password'            => '',
 			'dataApiPassword'     => '',
-			'webServicesWsdl'     => 'https://www.thepay.cz/gate/api/api.wsdl',
+			'webServicesWsdl'     => 'https://www.thepay.cz/gate/api/gate-api.wsdl',
 			'dataWebServicesWsdl' => 'https://www.thepay.cz/gate/api/data.wsdl',
 		],
 	];
@@ -33,7 +33,7 @@ class ThePayExtension extends Trejjam\BaseExtension\DI\BaseExtension
 		'accountId'           => '1',
 		'password'            => 'my$up3rsecr3tp4$$word',
 		'dataApiPassword'     => 'my$up3rsecr3tp4$$word',
-		'webServicesWsdl'     => 'https://www.thepay.cz/demo-gate/api/api-demo.wsdl',
+		'webServicesWsdl'     => 'https://www.thepay.cz/demo-gate/api/gate-api-demo.wsdl',
 		'dataWebServicesWsdl' => 'https://www.thepay.cz/demo-gate/api/data-demo.wsdl',
 	];
 

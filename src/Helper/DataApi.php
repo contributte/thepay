@@ -9,7 +9,6 @@
 namespace Trejjam\ThePay\Helper;
 
 use Nette,
-	App,
 	Trejjam,
 	Tp;
 
