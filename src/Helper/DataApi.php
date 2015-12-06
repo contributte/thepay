@@ -19,9 +19,17 @@ class DataApi
 	 */
 	protected $config;
 
-	function __construct(Tp\MerchantConfig $config)
+	function __construct(Trejjam\ThePay\MerchantConfig $config)
 	{
 		$this->config = $config;
+	}
+
+	/**
+	 * @return Trejjam\ThePay\MerchantConfig
+	 */
+	public function getMerchantConfig()
+	{
+		return $this->config;
 	}
 
 	/**

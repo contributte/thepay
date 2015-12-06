@@ -38,7 +38,7 @@ class ThePayExtension extends Trejjam\BaseExtension\DI\BaseExtension
 	];
 
 	protected $classesDefinition = [
-		'merchantConfig' => 'Tp\MerchantConfig',
+		'merchantConfig' => 'Trejjam\ThePay\MerchantConfig',
 		'helper.dataApi' => 'Trejjam\ThePay\Helper\DataApi',
 	];
 
@@ -60,6 +60,7 @@ class ThePayExtension extends Trejjam\BaseExtension\DI\BaseExtension
 
 		$classes['merchantConfig']
 			->addSetup(
+				'$service->isDemo = ?;' . "\n" .
 				'$service->gateUrl = ?;' . "\n" .
 				'$service->merchantId = ?;' . "\n" .
 				'$service->accountId = ?;' . "\n" .
@@ -68,6 +69,7 @@ class ThePayExtension extends Trejjam\BaseExtension\DI\BaseExtension
 				'$service->webServicesWsdl = ?;' . "\n" .
 				'$service->dataWebServicesWsdl = ?',
 				[
+					$config['demo'],
 					$merchantConfig['gateUrl'],
 					$merchantConfig['merchantId'],
 					$merchantConfig['accountId'],
