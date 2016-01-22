@@ -32,6 +32,7 @@ class ReturnedPayment extends Tp\ReturnedPayment
 
 		$this->linkGenerator = $linkGenerator;
 	}
+
 	public function setReturnUrl($returnUrl, $params = [])
 	{
 		if (preg_match('~^([\w:]+):(\w*+)(#.*)?()\z~', $returnUrl)) {
@@ -39,5 +40,23 @@ class ReturnedPayment extends Tp\ReturnedPayment
 		}
 
 		parent::setReturnUrl($returnUrl);
+	}
+
+	public function __debugInfo(){
+		$out=[];
+
+		foreach ($this->__sleep() as $v) {
+			$out[$v] = $this->$v;
+		}
+
+		return $out;
+	}
+
+	public function __sleep()
+	{
+		return array_diff(array_keys(get_object_vars($this)), [
+			'request',
+			'linkGenerator',
+		]);
 	}
 }
