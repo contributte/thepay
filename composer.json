@@ -11,7 +11,7 @@
 	],
 	"require": {
 		"php": ">=5.4",
-		"trejjam/thepay-lib": "dev-namespaces#d028377",
+		"trejjam/thepay-lib": "dev-namespaces#bc1d1da",
 		"trejjam/base-extension": "~0.5.0",
 		"nette/di": "~2.3",
 		"nette/application": "~2.3",
@@ -31,7 +31,7 @@
 	},
 	"extra": {
 		"branch-alias": {
-			"dev-master": "v0.7.x-dev"
+			"dev-master": "v0.9.x-dev"
 		}
 	}
 }
