@@ -34,7 +34,8 @@ class DataApi
 
 	/**
 	 * @param bool $onlyActive
-	 * @return Tp\DataApi\GetPaymentMethodsResponse
+	 *
+	 * @return Tp\DataApi\Responses\GetPaymentMethodsResponse
 	 */
 	public function getPaymentMethods($onlyActive = TRUE)
 	{
@@ -42,11 +43,12 @@ class DataApi
 	}
 
 	/**
-	 * @param Tp\DataApi\MerchantAccountMethod $method
-	 * @param string(tight|209x127|86x86)      $type
+	 * @param Tp\DataApi\Parameters\MerchantAccountMethod $method
+	 * @param string(tight|209x127|86x86)                 $type
+	 *
 	 * @return null|string
 	 */
-	public function getPaymentMethodIcon(Tp\DataApi\MerchantAccountMethod $method, $type = 'tight')
+	public function getPaymentMethodIcon(Tp\DataApi\Parameters\MerchantAccountMethod $method, $type = 'tight')
 	{
 		return Nette\Utils\Strings::replace($this->config->gateUrl, [
 			'~/demo-~' => '/',
@@ -55,7 +57,8 @@ class DataApi
 
 	/**
 	 * @param string $paymentId
-	 * @return Tp\DataApi\GetPaymentResponse
+	 *
+	 * @return Tp\DataApi\Responses\GetPaymentResponse
 	 */
 	public function getPayment($paymentId)
 	{
@@ -64,7 +67,8 @@ class DataApi
 
 	/**
 	 * @param string $paymentId
-	 * @return Tp\DataApi\GetPaymentInstructionsResponse
+	 *
+	 * @return Tp\DataApi\Responses\GetPaymentInstructionsResponse
 	 */
 	public function getPaymentInstructions($paymentId)
 	{
@@ -73,7 +77,8 @@ class DataApi
 
 	/**
 	 * @param string $paymentId
-	 * @return Tp\DataApi\GetPaymentStateResponse
+	 *
+	 * @return Tp\DataApi\Responses\GetPaymentStateResponse
 	 */
 	public function getPaymentState($paymentId)
 	{
