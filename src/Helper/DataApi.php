@@ -10,7 +10,8 @@ namespace Trejjam\ThePay\Helper;
 
 use Nette,
 	Trejjam,
-	Tp;
+	Tp,
+	Tp\DataApi\Parameters;
 
 class DataApi
 {
@@ -48,7 +49,7 @@ class DataApi
 	 *
 	 * @return null|string
 	 */
-	public function getPaymentMethodIcon(Tp\DataApi\Parameters\MerchantAccountMethod $method, $type = 'tight')
+	public function getPaymentMethodIcon(Parameters\MerchantAccountMethod $method, $type = 'tight')
 	{
 		return Nette\Utils\Strings::replace($this->config->gateUrl, [
 			'~/demo-~' => '/',
@@ -83,5 +84,20 @@ class DataApi
 	public function getPaymentState($paymentId)
 	{
 		return Tp\Helper\DataApi::getPaymentState($this->config, $paymentId);
+	}
+
+	/**
+	 * @param Parameters\GetPaymentsSearchParams|NULL $searchParams
+	 * @param Parameters\PaginationRequest|NULL       $pagination
+	 * @param Parameters\Ordering|NULL                $ordering
+	 *
+	 * @return Tp\DataApi\Responses\GetPaymentsResponse
+	 */
+	public function getPayments(
+		Parameters\GetPaymentsSearchParams $searchParams = NULL,
+		Parameters\PaginationRequest $pagination = NULL,
+		Parameters\Ordering $ordering = NULL)
+	{
+		return Tp\Helper\DataApi::getPayments($this->config, $searchParams, $pagination, $ordering);
 	}
 }
