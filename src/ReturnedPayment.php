@@ -42,6 +42,21 @@ class ReturnedPayment extends Tp\ReturnedPayment
 		parent::setReturnUrl($returnUrl);
 	}
 
+	/**
+	 * @param string|null $backToEshopUrl
+	 * @param array       $params
+	 *
+	 * @throws Nette\Application\UI\InvalidLinkException
+	 */
+	public function setBackToEshopUrl($backToEshopUrl = NULL, $params = [])
+	{
+		if ($backToEshopUrl !== NULL && preg_match('~^([\w:]+):(\w*+)(#.*)?()\z~', $backToEshopUrl)) {
+			$backToEshopUrl = $this->linkGenerator->link($backToEshopUrl, $params);
+		}
+
+		parent::setBackToEshopUrl($backToEshopUrl);
+	}
+
 	public function __debugInfo(){
 		$out=[];
 
