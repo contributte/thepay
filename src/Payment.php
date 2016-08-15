@@ -51,13 +51,23 @@ class Payment extends Tp\Payment
 		parent::setBackToEshopUrl($backToEshopUrl);
 	}
 
-	public function redirectOnlinePayment(Nette\Application\UI\Presenter $presenter)
+	public function getRedirectUrl()
 	{
 		$queryArgs = $this->getArgs();
 		$queryArgs['signature'] = $this->getSignature();
-		$url = $this->getMerchantConfig()->gateUrl . '?' . http_build_query($queryArgs);
 
-		$presenter->redirectUrl($url);
+		foreach ($queryArgs as &$arg) {
+			if (is_float($arg) || is_double($arg)) {
+				$arg = number_format($arg, 2, '.', '');
+			}
+		}
+
+		return $this->getMerchantConfig()->gateUrl . '?' . http_build_query($queryArgs);
+	}
+
+	public function redirectOnlinePayment(Nette\Application\UI\Presenter $presenter)
+	{
+		$presenter->redirectUrl($this->getRedirectUrl());
 	}
 
 	public function __debugInfo()

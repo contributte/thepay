@@ -11,9 +11,6 @@ application:
 	mapping:
 		*: Test\App\*Module\Presenters\*Presenter
 
-database:
-	dsn: "sqlite::memory:"
-
 services:
 	#routing.router:
 	#	autowired: no

@@ -11,7 +11,7 @@
 	],
 	"require": {
 		"php": ">=5.4",
-		"trejjam/thepay-lib": "dev-namespaces#27329d2",
+		"trejjam/thepay-lib": "dev-namespaces#9fdae50",
 		"trejjam/base-extension": "~0.5.0",
 		"nette/di": "~2.3",
 		"nette/application": "~2.3",
@@ -19,7 +19,10 @@
 		"ext-soap": "*"
 	},
 	"require-dev": {
-		"nette/tester": "@dev"
+		"nette/tester": "@dev",
+		"nette/bootstrap": "@dev",
+		"nette/robot-loader": "@dev",
+		"tracy/tracy": "@dev"
 	},
 	"autoload": {
 		"psr-4": {
