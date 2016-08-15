@@ -51,16 +51,23 @@ class Payment extends Tp\Payment
 		parent::setBackToEshopUrl($backToEshopUrl);
 	}
 
+	public function getArgs()
+	{
+		$args = parent::getArgs();
+
+		foreach ($args as &$arg) {
+			if (is_float($arg) || is_double($arg)) {
+				$arg = str_replace(',', '.', (string)$arg);
+			}
+		}
+
+		return $args;
+	}
+
 	public function getRedirectUrl()
 	{
 		$queryArgs = $this->getArgs();
 		$queryArgs['signature'] = $this->getSignature();
-
-		foreach ($queryArgs as &$arg) {
-			if (is_float($arg) || is_double($arg)) {
-				$arg = number_format($arg, 2, '.', '');
-			}
-		}
 
 		return $this->getMerchantConfig()->gateUrl . '?' . http_build_query($queryArgs);
 	}
