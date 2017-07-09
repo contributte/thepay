@@ -8,10 +8,10 @@
 
 namespace Trejjam\ThePay\Helper;
 
-use Nette,
-	Trejjam,
-	Tp,
-	Tp\DataApi\Parameters;
+use Nette;
+use Trejjam;
+use Tp;
+use Tp\DataApi\Parameters;
 
 class DataApi
 {

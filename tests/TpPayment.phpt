@@ -1,10 +1,5 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: jam
- * Date: 15.8.16
- * Time: 12:59
- */
+
 namespace Test;
 
 use Nette;

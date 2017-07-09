@@ -1,17 +1,10 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: jam
- * Date: 20.8.15
- * Time: 11:16
- */
 
 namespace Trejjam\ThePay;
 
-
-use Nette,
-	Tp,
-	Trejjam;
+use Nette;
+use Tp;
+use Trejjam;
 
 class ReturnedPayment extends Tp\ReturnedPayment
 {

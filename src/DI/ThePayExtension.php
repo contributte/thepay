@@ -1,16 +1,10 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Jan
- * Date: 26. 10. 2014
- * Time: 17:38
- */
 
 namespace Trejjam\ThePay\DI;
 
-use Nette,
-	Tp,
-	Trejjam;
+use Nette;
+use Tp;
+use Trejjam;
 
 class ThePayExtension extends Trejjam\BaseExtension\DI\BaseExtension
 {
