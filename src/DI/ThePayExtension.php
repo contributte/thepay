@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace Trejjam\ThePay\DI;
 
@@ -43,16 +44,24 @@ class ThePayExtension extends Trejjam\BaseExtension\DI\BaseExtension
 		'helper.radioMerchantFactory' => 'Trejjam\ThePay\Helper\IRadioMerchant',
 	];
 
+	public function loadConfiguration(bool $validateConfig = TRUE) : void
+	{
+		parent::loadConfiguration();
+
+		if ($this->config['demo']) {
+			$this->config['merchant'] = $this->merchantDemo;
+		}
+	}
+
 	public function beforeCompile()
 	{
 		parent::beforeCompile();
 
-		$config = $this->createConfig();
-		$merchantConfig = $config['merchant'];
+		$merchantConfig = $this->config['merchant'];
 
-		$classes = $this->getClasses();
+		$types = $this->getTypes();
 
-		$classes['merchantConfig']
+		$types['merchantConfig']
 			->addSetup(
 				'$service->isDemo = ?;' . "\n" .
 				'$service->gateUrl = ?;' . "\n" .
@@ -63,7 +72,7 @@ class ThePayExtension extends Trejjam\BaseExtension\DI\BaseExtension
 				'$service->webServicesWsdl = ?;' . "\n" .
 				'$service->dataWebServicesWsdl = ?',
 				[
-					$config['demo'],
+					$this->config['demo'],
 					$merchantConfig['gateUrl'],
 					$merchantConfig['merchantId'],
 					$merchantConfig['accountId'],
@@ -72,15 +81,5 @@ class ThePayExtension extends Trejjam\BaseExtension\DI\BaseExtension
 					$merchantConfig['webServicesWsdl'],
 					$merchantConfig['dataWebServicesWsdl'],
 				]);
-	}
-
-	protected function createConfig()
-	{
-		$config = parent::createConfig();
-		if ($config['demo']) {
-			$config['merchant'] = $this->merchantDemo;
-		}
-
-		return $config;
 	}
 }

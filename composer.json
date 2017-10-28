@@ -10,9 +10,9 @@
 		"MIT"
 	],
 	"require": {
-		"php": ">=5.4",
+		"php": ">=7.1",
 		"trejjam/thepay-lib": "dev-namespaces#3f20273",
-		"trejjam/base-extension": "~0.5",
+		"trejjam/base-extension": "~0.6",
 		"nette/di": "~2.3",
 		"nette/application": "~2.3",
 
