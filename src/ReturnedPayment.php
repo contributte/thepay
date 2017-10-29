@@ -1,10 +1,10 @@
 <?php
+declare(strict_types=1);
 
 namespace Trejjam\ThePay;
 
 use Nette;
 use Tp;
-use Trejjam;
 
 class ReturnedPayment extends Tp\ReturnedPayment
 {
@@ -50,8 +50,9 @@ class ReturnedPayment extends Tp\ReturnedPayment
 		parent::setBackToEshopUrl($backToEshopUrl);
 	}
 
-	public function __debugInfo(){
-		$out=[];
+	public function __debugInfo()
+	{
+		$out = [];
 
 		foreach ($this->__sleep() as $v) {
 			$out[$v] = $this->$v;

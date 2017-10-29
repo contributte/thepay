@@ -1,10 +1,5 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: jam
- * Date: 24.9.15
- * Time: 11:08
- */
+declare(strict_types=1);
 
 namespace Trejjam\ThePay\Helper;
 
@@ -25,20 +20,12 @@ class DataApi
 		$this->config = $config;
 	}
 
-	/**
-	 * @return Trejjam\ThePay\MerchantConfig
-	 */
-	public function getMerchantConfig()
+	public function getMerchantConfig() : Trejjam\ThePay\MerchantConfig
 	{
 		return $this->config;
 	}
 
-	/**
-	 * @param bool $onlyActive
-	 *
-	 * @return Tp\DataApi\Responses\GetPaymentMethodsResponse
-	 */
-	public function getPaymentMethods($onlyActive = TRUE)
+	public function getPaymentMethods(bool $onlyActive = TRUE) : Tp\DataApi\Responses\GetPaymentMethodsResponse
 	{
 		return Tp\Helper\DataApi::getPaymentMethods($this->config, $onlyActive);
 	}
@@ -49,55 +36,48 @@ class DataApi
 	 *
 	 * @return null|string
 	 */
-	public function getPaymentMethodIcon(Parameters\MerchantAccountMethod $method, $type = 'tight')
+	public function getPaymentMethodIcon(Parameters\MerchantAccountMethod $method, string $type = 'tight') : string
 	{
 		return Nette\Utils\Strings::replace($this->config->gateUrl, [
-			'~/demo-~' => '/',
-		]) . 'images/logos/public/' . $type . '/' . $method->getId() . '.png';
+				'~/demo-~' => '/',
+			]) . 'images/logos/public/' . $type . '/' . $method->getId() . '.png';
 	}
 
-	/**
-	 * @param string $paymentId
-	 *
-	 * @return Tp\DataApi\Responses\GetPaymentResponse
-	 */
-	public function getPayment($paymentId)
+	public function getPayment(string $paymentId) : Tp\DataApi\Responses\GetPaymentResponse
 	{
 		return Tp\Helper\DataApi::getPayment($this->config, $paymentId);
 	}
 
-	/**
-	 * @param string $paymentId
-	 *
-	 * @return Tp\DataApi\Responses\GetPaymentInstructionsResponse
-	 */
-	public function getPaymentInstructions($paymentId)
+	public function getPaymentInstructions(string $paymentId) : Tp\DataApi\Responses\GetPaymentInstructionsResponse
 	{
 		return Tp\Helper\DataApi::getPaymentInstructions($this->config, $paymentId);
 	}
 
-	/**
-	 * @param string $paymentId
-	 *
-	 * @return Tp\DataApi\Responses\GetPaymentStateResponse
-	 */
-	public function getPaymentState($paymentId)
+	public function getPaymentState(string $paymentId) : Tp\DataApi\Responses\GetPaymentStateResponse
 	{
 		return Tp\Helper\DataApi::getPaymentState($this->config, $paymentId);
 	}
 
-	/**
-	 * @param Parameters\GetPaymentsSearchParams|NULL $searchParams
-	 * @param Parameters\PaginationRequest|NULL       $pagination
-	 * @param Parameters\Ordering|NULL                $ordering
-	 *
-	 * @return Tp\DataApi\Responses\GetPaymentsResponse
-	 */
 	public function getPayments(
 		Parameters\GetPaymentsSearchParams $searchParams = NULL,
 		Parameters\PaginationRequest $pagination = NULL,
-		Parameters\Ordering $ordering = NULL)
-	{
+		Parameters\Ordering $ordering = NULL
+	) : Tp\DataApi\Responses\GetPaymentsResponse {
 		return Tp\Helper\DataApi::getPayments($this->config, $searchParams, $pagination, $ordering);
+	}
+
+	/**
+	 * @param       $type
+	 * @param array $paymentMethods
+	 *
+	 * @return Tp\DataApi\Responses\SetPaymentMethodsResponse
+	 * @throws Tp\InvalidSignatureException
+	 * @throws Tp\SoapException
+	 */
+	public function setPaymentMethods(
+		$type,
+		array $paymentMethods = NULL
+	) : Tp\DataApi\Responses\SetPaymentMethodsResponse {
+		return Tp\Helper\DataApi::setPaymentMethods($this->config, $type, $paymentMethods);
 	}
 }

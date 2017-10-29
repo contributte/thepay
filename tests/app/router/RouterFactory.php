@@ -1,10 +1,11 @@
 <?php
+declare(strict_types=1);
 
 namespace Test\App;
 
-use Nette,
-	Nette\Application\Routers\RouteList,
-	Nette\Application\Routers\Route;
+use Nette;
+use Nette\Application\Routers\RouteList;
+use Nette\Application\Routers\Route;
 
 
 /**

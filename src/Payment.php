@@ -1,10 +1,10 @@
 <?php
+declare(strict_types=1);
 
 namespace Trejjam\ThePay;
 
 use Nette;
 use Tp;
-use Trejjam;
 
 class Payment extends Tp\Payment
 {
@@ -20,7 +20,7 @@ class Payment extends Tp\Payment
 		$this->linkGenerator = $linkGenerator;
 	}
 
-	public function setReturnUrl($returnUrl, $params = [])
+	public function setReturnUrl($returnUrl, array $params = [])
 	{
 		if (preg_match('~^([\w:]+):(\w*+)(#.*)?()\z~', $returnUrl)) {
 			$returnUrl = $this->linkGenerator->link($returnUrl, $params);
@@ -44,7 +44,7 @@ class Payment extends Tp\Payment
 		parent::setBackToEshopUrl($backToEshopUrl);
 	}
 
-	public function getRedirectUrl()
+	public function getRedirectUrl() : string
 	{
 		$queryArgs = $this->getArgs();
 		$queryArgs['signature'] = $this->getSignature();

@@ -11,7 +11,7 @@
 	],
 	"require": {
 		"php": ">=7.1",
-		"trejjam/thepay-lib": "dev-namespaces#8bfc44f",
+		"trejjam/thepay-lib": "dev-namespaces#aef9b4c",
 		"trejjam/base-extension": "~0.7",
 		"nette/di": "~2.3",
 		"nette/application": "~2.3",
@@ -27,10 +27,7 @@
 	"autoload": {
 		"psr-4": {
 			"Trejjam\\ThePay\\": "src/"
-		},
-		"classmap": [
-			"src/exceptions.php"
-		]
+		}
 	},
 	"extra": {
 		"branch-alias": {

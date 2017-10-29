@@ -80,6 +80,7 @@ class ThePayExtension extends Trejjam\BaseExtension\DI\BaseExtension
 					$merchantConfig['dataApiPassword'],
 					$merchantConfig['webServicesWsdl'],
 					$merchantConfig['dataWebServicesWsdl'],
-				]);
+				]
+			);
 	}
 }

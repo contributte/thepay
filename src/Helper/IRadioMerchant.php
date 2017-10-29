@@ -1,13 +1,14 @@
 <?php
+declare(strict_types=1);
 
 namespace Trejjam\ThePay\Helper;
 
-use Tp;
+use Tp\Helper\RadioMerchant;
 
 interface IRadioMerchant
 {
 	/**
-	 * @return Tp\Helper\RadioMerchant
+	 * @return RadioMerchant
 	 */
 	function create();
 }

@@ -1,10 +1,10 @@
 <?php
+declare(strict_types=1);
 
 namespace Trejjam\ThePay;
 
 use Nette;
 use Tp;
-use Trejjam;
 
 class PermanentPayment extends Tp\PermanentPayment
 {
@@ -20,7 +20,7 @@ class PermanentPayment extends Tp\PermanentPayment
 		$this->linkGenerator = $linkGenerator;
 	}
 
-	public function getMerchantData()
+	public function getMerchantData() : string
 	{
 		if (is_null($this->merchantData)) {
 			throw new PermanentPaymentException('Property merchantData was not set', PermanentPaymentException::UNDEFINED_PROPERTY);
@@ -29,7 +29,7 @@ class PermanentPayment extends Tp\PermanentPayment
 		return parent::getMerchantData();
 	}
 
-	public function getDescription()
+	public function getDescription() : string
 	{
 		if (is_null($this->description)) {
 			throw new PermanentPaymentException('Property description was not set', PermanentPaymentException::UNDEFINED_PROPERTY);
@@ -38,7 +38,7 @@ class PermanentPayment extends Tp\PermanentPayment
 		return parent::getDescription();
 	}
 
-	public function getReturnUrl()
+	public function getReturnUrl() : string
 	{
 		if (is_null($this->returnUrl)) {
 			throw new PermanentPaymentException('Property returnUrl was not set', PermanentPaymentException::UNDEFINED_PROPERTY);
@@ -56,7 +56,7 @@ class PermanentPayment extends Tp\PermanentPayment
 		parent::setReturnUrl($returnUrl);
 	}
 
-	public function getSignature()
+	public function getSignature() : string
 	{
 		$this->getMerchantData();
 		$this->getDescription();
@@ -65,7 +65,7 @@ class PermanentPayment extends Tp\PermanentPayment
 		return parent::getSignature();
 	}
 
-	public function getSignatureLite()
+	public function getSignatureLite() : string
 	{
 		$this->getMerchantData();
 

@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace Trejjam\ThePay;
 
@@ -13,7 +14,7 @@ class MerchantConfig extends Tp\MerchantConfig
 {
 	public $isDemo = FALSE;
 
-	public function isDemo()
+	public function isDemo() : bool
 	{
 		return $this->isDemo;
 	}
