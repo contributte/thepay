@@ -13,8 +13,10 @@ class PermanentPayment extends Tp\PermanentPayment
 	 */
 	protected $linkGenerator;
 
-	public function __construct(MerchantConfig $config, Nette\Application\LinkGenerator $linkGenerator)
-	{
+	public function __construct(
+		MerchantConfig $config,
+		Nette\Application\LinkGenerator $linkGenerator
+	) {
 		parent::__construct($config, NULL, NULL, NULL);
 
 		$this->linkGenerator = $linkGenerator;
@@ -47,7 +49,7 @@ class PermanentPayment extends Tp\PermanentPayment
 		return parent::getReturnUrl();
 	}
 
-	public function setReturnUrl($returnUrl, $params = [])
+	public function setReturnUrl(string $returnUrl, array $params = []) : void
 	{
 		if (preg_match('~^([\w:]+):(\w*+)(#.*)?()\z~', $returnUrl)) {
 			$returnUrl = $this->linkGenerator->link($returnUrl, $params);
@@ -58,10 +60,6 @@ class PermanentPayment extends Tp\PermanentPayment
 
 	public function getSignature() : string
 	{
-		$this->getMerchantData();
-		$this->getDescription();
-		$this->getReturnUrl();
-
 		return parent::getSignature();
 	}
 

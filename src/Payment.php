@@ -13,15 +13,19 @@ class Payment extends Tp\Payment
 	 */
 	protected $linkGenerator;
 
-	public function __construct(MerchantConfig $config = NULL, Nette\Application\LinkGenerator $linkGenerator)
-	{
+	public function __construct(
+		MerchantConfig $config = NULL,
+		Nette\Application\LinkGenerator $linkGenerator
+	) {
 		parent::__construct($config);
 
 		$this->linkGenerator = $linkGenerator;
 	}
 
-	public function setReturnUrl($returnUrl, array $params = [])
-	{
+	public function setReturnUrl(
+		string $returnUrl,
+		array $params = []
+	) : void {
 		if (preg_match('~^([\w:]+):(\w*+)(#.*)?()\z~', $returnUrl)) {
 			$returnUrl = $this->linkGenerator->link($returnUrl, $params);
 		}
@@ -35,8 +39,10 @@ class Payment extends Tp\Payment
 	 *
 	 * @throws Nette\Application\UI\InvalidLinkException
 	 */
-	public function setBackToEshopUrl($backToEshopUrl = NULL, $params = [])
-	{
+	public function setBackToEshopUrl(
+		string $backToEshopUrl = NULL,
+		array $params = []
+	) : void {
 		if ($backToEshopUrl !== NULL && preg_match('~^([\w:]+):(\w*+)(#.*)?()\z~', $backToEshopUrl)) {
 			$backToEshopUrl = $this->linkGenerator->link($backToEshopUrl, $params);
 		}
@@ -57,18 +63,18 @@ class Payment extends Tp\Payment
 		$presenter->redirectUrl($this->getRedirectUrl());
 	}
 
-	public function __debugInfo()
+	public function __debugInfo() : array
 	{
 		$out = [];
 
-		foreach ($this->__sleep() as $v) {
-			$out[$v] = $this->$v;
+		foreach ($this->__sleep() as $property) {
+			$out[$property] = $this->{$property};
 		}
 
 		return $out;
 	}
 
-	public function __sleep()
+	public function __sleep() : array
 	{
 		return array_diff(array_keys(get_object_vars($this)), [
 			'linkGenerator',

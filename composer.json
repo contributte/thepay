@@ -29,6 +29,11 @@
 			"Trejjam\\ThePay\\": "src/"
 		}
 	},
+	"autoload-dev": {
+		"psr-4": {
+			"Tests\\": "tests/src/"
+		}
+	},
 	"extra": {
 		"branch-alias": {
 			"dev-master": "v3.4.x-dev"

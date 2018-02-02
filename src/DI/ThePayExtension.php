@@ -53,7 +53,7 @@ class ThePayExtension extends Trejjam\BaseExtension\DI\BaseExtension
 		}
 	}
 
-	public function beforeCompile()
+	public function beforeCompile() : void
 	{
 		parent::beforeCompile();
 
