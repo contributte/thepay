@@ -43,7 +43,10 @@ class Payment extends Tp\Payment
 		string $backToEshopUrl = NULL,
 		array $params = []
 	) : void {
-		if ($backToEshopUrl !== NULL && preg_match('~^([\w:]+):(\w*+)(#.*)?()\z~', $backToEshopUrl)) {
+		if (
+			$backToEshopUrl !== NULL
+			&& preg_match('~^([\w:]+):(\w*+)(#.*)?()\z~', $backToEshopUrl)
+		) {
 			$backToEshopUrl = $this->linkGenerator->link($backToEshopUrl, $params);
 		}
 
@@ -58,7 +61,7 @@ class Payment extends Tp\Payment
 		return $this->getMerchantConfig()->gateUrl . '?' . http_build_query($queryArgs);
 	}
 
-	public function redirectOnlinePayment(Nette\Application\UI\Presenter $presenter)
+	public function redirectOnlinePayment(Nette\Application\UI\Presenter $presenter) : void
 	{
 		$presenter->redirectUrl($this->getRedirectUrl());
 	}

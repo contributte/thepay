@@ -50,7 +50,10 @@ class ReturnedPayment extends Tp\ReturnedPayment
 		string $backToEshopUrl = NULL,
 		array $params = []
 	) : void {
-		if ($backToEshopUrl !== NULL && preg_match('~^([\w:]+):(\w*+)(#.*)?()\z~', $backToEshopUrl)) {
+		if (
+			$backToEshopUrl !== NULL
+			&& preg_match('~^([\w:]+):(\w*+)(#.*)?()\z~', $backToEshopUrl)
+		) {
 			$backToEshopUrl = $this->linkGenerator->link($backToEshopUrl, $params);
 		}
 
@@ -61,8 +64,8 @@ class ReturnedPayment extends Tp\ReturnedPayment
 	{
 		$out = [];
 
-		foreach ($this->__sleep() as $v) {
-			$out[$v] = $this->$v;
+		foreach ($this->__sleep() as $property) {
+			$out[$property] = $this->{$property};
 		}
 
 		return $out;

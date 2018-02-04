@@ -24,8 +24,8 @@ class ThePayExtension extends Trejjam\BaseExtension\DI\BaseExtension
 
 	protected $merchantDemo = [
 		'gateUrl'             => 'https://www.thepay.cz/demo-gate/',
-		'merchantId'          => '1',
-		'accountId'           => '1',
+		'merchantId'          => 1,
+		'accountId'           => 1,
 		'password'            => 'my$up3rsecr3tp4$$word',
 		'dataApiPassword'     => 'my$up3rsecr3tp4$$word',
 		'webServicesWsdl'     => 'https://www.thepay.cz/demo-gate/api/gate-api-demo.wsdl',
@@ -74,8 +74,8 @@ class ThePayExtension extends Trejjam\BaseExtension\DI\BaseExtension
 				[
 					$this->config['demo'],
 					$merchantConfig['gateUrl'],
-					$merchantConfig['merchantId'],
-					$merchantConfig['accountId'],
+					intval($merchantConfig['merchantId']),
+					intval($merchantConfig['accountId']),
 					$merchantConfig['password'],
 					$merchantConfig['dataApiPassword'],
 					$merchantConfig['webServicesWsdl'],
