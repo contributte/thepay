@@ -17,14 +17,14 @@ Configuration
 
 ```yml
 extensions:
-	thepay: Trejjam\ThePay\DI\ThePayExtension
+	trejjam.thepay: Trejjam\ThePay\DI\ThePayExtension
 
-thepay:
+trejjam.thepay:
 	demo: true #if is true, extension rewrite merchant values
 	merchant:
 		gateUrl: 'https://www.thepay.cz/gate/'
-		merchantId: ''
-		accountId: ''
+		merchantId: (int)
+		accountId: (int)
 		password: ''
 		dataApiPassword: ''
 		webServicesWsdl: 'https://www.thepay.cz/gate/api/api-demo.wsdl'
@@ -33,7 +33,7 @@ thepay:
 
 Minimal production configuration:
 ```yml
-thepay:
+trejjam.thepay:
 	demo: false
 	merchant:
 		merchantId: ''
