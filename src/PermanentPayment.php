@@ -28,7 +28,7 @@ class PermanentPayment extends Tp\PermanentPayment
 			throw new PermanentPaymentException('Property merchantData was not set', PermanentPaymentException::UNDEFINED_PROPERTY);
 		}
 
-		return parent::getMerchantData();
+		return $this->merchantData;
 	}
 
 	public function getDescription() : string
@@ -37,7 +37,7 @@ class PermanentPayment extends Tp\PermanentPayment
 			throw new PermanentPaymentException('Property description was not set', PermanentPaymentException::UNDEFINED_PROPERTY);
 		}
 
-		return parent::getDescription();
+		return $this->description;
 	}
 
 	public function getReturnUrl() : string
@@ -46,7 +46,7 @@ class PermanentPayment extends Tp\PermanentPayment
 			throw new PermanentPaymentException('Property returnUrl was not set', PermanentPaymentException::UNDEFINED_PROPERTY);
 		}
 
-		return parent::getReturnUrl();
+		return $this->returnUrl;
 	}
 
 	public function setReturnUrl(string $returnUrl, array $params = []) : void

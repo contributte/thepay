@@ -18,7 +18,7 @@ class ReturnedPayment extends Tp\ReturnedPayment
 	protected $linkGenerator;
 
 	public function __construct(
-		MerchantConfig $config = NULL,
+		MerchantConfig $config,
 		Nette\Http\IRequest $request,
 		Nette\Application\LinkGenerator $linkGenerator
 	) {

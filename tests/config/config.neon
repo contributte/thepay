@@ -14,7 +14,7 @@ application:
 services:
 	#routing.router:
 	#	autowired: no
-	router: Test\App\RouterFactory()::createRouter
+	router: Tests\Router\Factory()::createRouter
 	#simpleRouter: Nette\Application\Routers\SimpleRouter
 	url: Nette\Http\Url('http://localhost.tld/')
 	application.linkGenerator: Nette\Application\LinkGenerator(@router, @url)

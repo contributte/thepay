@@ -11,7 +11,7 @@ use Tp\DataApi\Parameters;
 class DataApi
 {
 	/**
-	 * @var Tp\MerchantConfig
+	 * @var Trejjam\ThePay\MerchantConfig
 	 */
 	protected $config;
 
@@ -31,10 +31,10 @@ class DataApi
 	}
 
 	/**
-	 * @param Tp\DataApi\Parameters\MerchantAccountMethod $method
-	 * @param string(tight|209x127|86x86)                 $type
+	 * @param Parameters\MerchantAccountMethod $method
+	 * @param string                           $type (tight|209x127|86x86)
 	 *
-	 * @return null|string
+	 * @return string
 	 */
 	public function getPaymentMethodIcon(Parameters\MerchantAccountMethod $method, string $type = 'tight') : string
 	{
@@ -43,17 +43,17 @@ class DataApi
 			]) . 'images/logos/public/' . $type . '/' . $method->getId() . '.png';
 	}
 
-	public function getPayment(string $paymentId) : Tp\DataApi\Responses\GetPaymentResponse
+	public function getPayment(int $paymentId) : Tp\DataApi\Responses\GetPaymentResponse
 	{
 		return Tp\Helper\DataApi::getPayment($this->config, $paymentId);
 	}
 
-	public function getPaymentInstructions(string $paymentId) : Tp\DataApi\Responses\GetPaymentInstructionsResponse
+	public function getPaymentInstructions(int $paymentId) : Tp\DataApi\Responses\GetPaymentInstructionsResponse
 	{
 		return Tp\Helper\DataApi::getPaymentInstructions($this->config, $paymentId);
 	}
 
-	public function getPaymentState(string $paymentId) : Tp\DataApi\Responses\GetPaymentStateResponse
+	public function getPaymentState(int $paymentId) : Tp\DataApi\Responses\GetPaymentStateResponse
 	{
 		return Tp\Helper\DataApi::getPaymentState($this->config, $paymentId);
 	}
@@ -67,7 +67,7 @@ class DataApi
 	}
 
 	/**
-	 * @param       $type
+	 * @param mixed $type
 	 * @param array $paymentMethods
 	 *
 	 * @return Tp\DataApi\Responses\SetPaymentMethodsResponse

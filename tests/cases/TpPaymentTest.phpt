@@ -1,14 +1,14 @@
 <?php
 declare(strict_types=1);
 
-namespace Test;
+namespace Tests;
 
 use Nette;
 use Tester;
 use Tester\Assert;
 use Trejjam;
 
-$container = require_once __DIR__ . '/bootstrap.php';
+$container = require_once dirname(__DIR__) . '/bootstrap.php';
 
 class TpPaymentTest extends Tester\TestCase
 {
@@ -34,7 +34,7 @@ class TpPaymentTest extends Tester\TestCase
 
 	protected function createConfig()
 	{
-		return new Trejjam\ThePay\MerchantConfig();
+		return new Trejjam\ThePay\MerchantConfig;
 	}
 
 
@@ -47,8 +47,8 @@ class TpPaymentTest extends Tester\TestCase
 	{
 		$payment = new Trejjam\ThePay\Payment($this->createConfig(), $this->linkGenerator);
 
-		$payment->setMethodId('21');
-		$payment->setValue('2000.23');
+		$payment->setMethodId(21);
+		$payment->setValue(2000.23);
 		$payment->setCurrency('CZK');
 		$payment->setMerchantData('24');
 		$payment->setMerchantSpecificSymbol('10');
@@ -72,7 +72,7 @@ class TpPaymentTest extends Tester\TestCase
 	{
 		$payment = $this->createPayment();
 
-		$payment->setValue('23.79');
+		$payment->setValue(23.79);
 
 		$queryArgs = $payment->getArgs();
 		$queryArgs['signature'] = $payment->getSignature();
