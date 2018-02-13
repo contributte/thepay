@@ -36,8 +36,8 @@ Minimal production configuration:
 trejjam.thepay:
 	demo: false
 	merchant:
-		merchantId: ''
-		accountId: ''
+		merchantId: (int)
+		accountId: (int)
 		password: ''
 		dataApiPassword: ''
 ```
