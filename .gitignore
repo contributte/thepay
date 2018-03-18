@@ -1,5 +1,7 @@
 .idea
 composer.lock
 vendor
+temp
+log
 
 tests/php-unix.generated.ini
