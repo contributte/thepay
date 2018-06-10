@@ -5,5 +5,5 @@ namespace Trejjam\ThePay;
 
 interface IPayment
 {
-	function create() : Payment;
+	public function create() : Payment;
 }

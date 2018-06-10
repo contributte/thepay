@@ -3,10 +3,9 @@ declare(strict_types=1);
 
 namespace Trejjam\ThePay\Helper;
 
-use Nette;
-use Trejjam;
 use Tp;
 use Tp\DataApi\Parameters;
+use Trejjam;
 
 class DataApi
 {
@@ -15,7 +14,7 @@ class DataApi
 	 */
 	protected $config;
 
-	function __construct(Trejjam\ThePay\MerchantConfig $config)
+	public function __construct(Trejjam\ThePay\MerchantConfig $config)
 	{
 		$this->config = $config;
 	}
@@ -25,22 +24,17 @@ class DataApi
 		return $this->config;
 	}
 
-	public function getPaymentMethods(bool $onlyActive = TRUE) : Tp\DataApi\Responses\GetPaymentMethodsResponse
+	public function getPaymentMethods(bool $onlyActive = true) : Tp\DataApi\Responses\GetPaymentMethodsResponse
 	{
 		return Tp\Helper\DataApi::getPaymentMethods($this->config, $onlyActive);
 	}
 
 	/**
-	 * @param Parameters\MerchantAccountMethod $method
-	 * @param string                           $type (tight|209x127|86x86)
-	 *
-	 * @return string
+	 * @param string $type (tight|209x127|86x86)
 	 */
 	public function getPaymentMethodIcon(Parameters\MerchantAccountMethod $method, string $type = 'tight') : string
 	{
-		return Nette\Utils\Strings::replace($this->config->gateUrl, [
-				'~/demo-~' => '/',
-			]) . 'images/logos/public/' . $type . '/' . $method->getId() . '.png';
+		return "{$this->config->resourceUrl}/images/logos/public/{$type}/{$method->getId()}.png";
 	}
 
 	public function getPayment(int $paymentId) : Tp\DataApi\Responses\GetPaymentResponse
@@ -59,24 +53,22 @@ class DataApi
 	}
 
 	public function getPayments(
-		Parameters\GetPaymentsSearchParams $searchParams = NULL,
-		Parameters\PaginationRequest $pagination = NULL,
-		Parameters\Ordering $ordering = NULL
+		?Parameters\GetPaymentsSearchParams $searchParams = null,
+		?Parameters\PaginationRequest $pagination = null,
+		?Parameters\Ordering $ordering = null
 	) : Tp\DataApi\Responses\GetPaymentsResponse {
 		return Tp\Helper\DataApi::getPayments($this->config, $searchParams, $pagination, $ordering);
 	}
 
 	/**
 	 * @param mixed $type
-	 * @param array $paymentMethods
 	 *
-	 * @return Tp\DataApi\Responses\SetPaymentMethodsResponse
 	 * @throws Tp\InvalidSignatureException
 	 * @throws Tp\SoapException
 	 */
 	public function setPaymentMethods(
 		$type,
-		array $paymentMethods = NULL
+		?array $paymentMethods = null
 	) : Tp\DataApi\Responses\SetPaymentMethodsResponse {
 		return Tp\Helper\DataApi::setPaymentMethods($this->config, $type, $paymentMethods);
 	}

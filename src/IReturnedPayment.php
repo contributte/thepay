@@ -5,5 +5,5 @@ namespace Trejjam\ThePay;
 
 interface IReturnedPayment
 {
-	function create() : ReturnedPayment;
+	public function create() : ReturnedPayment;
 }

@@ -7,7 +7,14 @@ use Tp;
 
 class MerchantConfig extends Tp\MerchantConfig
 {
-	public $isDemo = FALSE;
+	/**
+	 * @var bool
+	 */
+	public $isDemo = false;
+	/**
+	 * @var string
+	 */
+	public $resourceUrl = 'https://www.thepay.cz/gate';
 
 	public function isDemo() : bool
 	{

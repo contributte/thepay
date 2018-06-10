@@ -3,14 +3,12 @@ declare(strict_types=1);
 
 namespace Trejjam\ThePay\DI;
 
-use Nette;
-use Tp;
 use Trejjam;
 
 class ThePayExtension extends Trejjam\BaseExtension\DI\BaseExtension
 {
 	protected $default = [
-		'demo'     => TRUE,
+		'demo'     => true,
 		'merchant' => [
 			'gateUrl'             => 'https://www.thepay.cz/gate/',
 			'merchantId'          => '',
@@ -44,7 +42,7 @@ class ThePayExtension extends Trejjam\BaseExtension\DI\BaseExtension
 		'helper.radioMerchantFactory' => 'Trejjam\ThePay\Helper\IRadioMerchant',
 	];
 
-	public function loadConfiguration(bool $validateConfig = TRUE) : void
+	public function loadConfiguration(bool $validateConfig = true) : void
 	{
 		parent::loadConfiguration();
 

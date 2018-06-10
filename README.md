@@ -2,6 +2,7 @@ ThePay
 ======
 
 [![Latest stable](https://img.shields.io/packagist/v/trejjam/thepay.svg)](https://packagist.org/packages/trejjam/thepay)
+[![Build Status](https://travis-ci.org/Trejjam/ThePay.svg?branch=master)](https://travis-ci.org/Trejjam/ThePay)
 
 Installation
 ------------
