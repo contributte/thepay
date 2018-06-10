@@ -35,16 +35,15 @@ class Payment extends Tp\Payment
 
 	/**
 	 * @param string|null $backToEshopUrl
-	 * @param array       $params
 	 *
 	 * @throws Nette\Application\UI\InvalidLinkException
 	 */
 	public function setBackToEshopUrl(
-		string $backToEshopUrl = NULL,
+		?string $backToEshopUrl = null,
 		array $params = []
 	) : void {
 		if (
-			$backToEshopUrl !== NULL
+			$backToEshopUrl !== null
 			&& preg_match('~^([\w:]+):(\w*+)(#.*)?()\z~', $backToEshopUrl)
 		) {
 			$backToEshopUrl = $this->linkGenerator->link($backToEshopUrl, $params);

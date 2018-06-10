@@ -17,7 +17,7 @@ class PermanentPayment extends Tp\PermanentPayment
 		MerchantConfig $config,
 		Nette\Application\LinkGenerator $linkGenerator
 	) {
-		parent::__construct($config, NULL, NULL, NULL);
+		parent::__construct($config, null, null, null);
 
 		$this->linkGenerator = $linkGenerator;
 	}

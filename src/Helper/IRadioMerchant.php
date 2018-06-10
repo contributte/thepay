@@ -7,5 +7,5 @@ use Tp\Helper\RadioMerchant;
 
 interface IRadioMerchant
 {
-	function create() : RadioMerchant;
+	public function create() : RadioMerchant;
 }

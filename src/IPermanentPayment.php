@@ -5,5 +5,5 @@ namespace Trejjam\ThePay;
 
 interface IPermanentPayment
 {
-	function create() : PermanentPayment;
+	public function create() : PermanentPayment;
 }
