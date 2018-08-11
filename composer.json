@@ -11,7 +11,7 @@
 	],
 	"require": {
 		"php": ">=7.1",
-		"trejjam/thepay-lib": "dev-namespaces#24e7f2f",
+		"trejjam/thepay-lib": "dev-namespaces#049ff9b",
 		"trejjam/base-extension": "~0.7",
 		"nette/di": "~2.3 || ~3.0",
 		"nette/application": "~2.3",
