@@ -3,7 +3,7 @@
 all: test
 	echo "Is done"
 
-test: phpstan ecs
+test: phpstan
 	composer run-script tester
 
 phpstan:
