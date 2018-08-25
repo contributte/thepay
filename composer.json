@@ -1,6 +1,6 @@
 {
 	"name": "trejjam/thepay",
-	"description": "The pay library nette extension",
+	"description": "ThePay library - nette extension",
 	"keywords": [
 		"the pay",
 		"nette",
@@ -11,7 +11,7 @@
 	],
 	"require": {
 		"php": ">=7.1",
-		"trejjam/thepay-lib": "dev-namespaces#049ff9b",
+		"trejjam/thepay-lib": "^4.0.0",
 		"trejjam/base-extension": "~0.7",
 		"nette/di": "~2.3 || ~3.0",
 		"nette/application": "~2.3",
@@ -23,8 +23,9 @@
 		"nette/bootstrap": "@dev",
 		"nette/robot-loader": "@dev",
 		"tracy/tracy": "~2.5.0",
-		"phpstan/phpstan": "^0.10.2",
-		"symplify/easy-coding-standard": "^4.6"
+
+		"phpstan/phpstan": "~0.10.2",
+		"symplify/easy-coding-standard": "~4.6.0"
 	},
 	"autoload": {
 		"psr-4": {
