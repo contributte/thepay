@@ -3,7 +3,12 @@ declare(strict_types=1);
 
 namespace Tests;
 
-use Nette;
+use Contributte\ThePay\MerchantConfig;
+use Contributte\ThePay\Payment;
+use Nette\DI\Container;
+use Nette\Application\LinkGenerator;
+use Nette\Application\UI\InvalidLinkException;
+use Tp\InvalidParameterException;
 use Tester;
 use Tester\Assert;
 use Trejjam;
@@ -13,39 +18,36 @@ $container = require_once dirname(__DIR__) . '/bootstrap.php';
 class TpPaymentTest extends Tester\TestCase
 {
 	/**
-	 * @var Nette\Application\LinkGenerator
+	 * @var LinkGenerator
 	 */
 	protected $linkGenerator;
 	/**
-	 * @var Nette\DI\Container
+	 * @var Container
 	 */
 	private $container;
 
-	function __construct(Nette\DI\Container $container)
+	function __construct(Container $container)
 	{
-
 		$this->container = $container;
 	}
 
 	public function setUp()
 	{
-		$this->linkGenerator = $this->container->getByType('Nette\Application\LinkGenerator');
+		$this->linkGenerator = $this->container->getByType(LinkGenerator::class);
 	}
 
 	protected function createConfig()
 	{
-		return new Trejjam\ThePay\MerchantConfig;
+		return new MerchantConfig;
 	}
 
-
 	/**
-	 * @return Trejjam\ThePay\Payment
-	 * @throws Nette\Application\UI\InvalidLinkException
-	 * @throws \Tp\InvalidParameterException
+	 * @throws InvalidLinkException
+	 * @throws InvalidParameterException
 	 */
-	protected function createPayment()
+	protected function createPayment() : Payment
 	{
-		$payment = new Trejjam\ThePay\Payment($this->createConfig(), $this->linkGenerator);
+		$payment = new Payment($this->createConfig(), $this->linkGenerator);
 
 		$payment->setMethodId(21);
 		$payment->setValue(2000.23);
@@ -58,7 +60,7 @@ class TpPaymentTest extends Tester\TestCase
 		return $payment;
 	}
 
-	public function testGenerateUrl()
+	public function testGenerateUrl() : void
 	{
 		$payment = $this->createPayment();
 
@@ -68,7 +70,7 @@ class TpPaymentTest extends Tester\TestCase
 		Assert::same('https://www.thepay.cz/demo-gate/?merchantId=1&accountId=1&value=2000.23&currency=CZK&merchantData=24&returnUrl=http%3A%2F%2Fgoogle.com&backToEshopUrl=http%3A%2F%2Fgoogle.com&methodId=21&merchantSpecificSymbol=10&signature=2baf4a3c6274180ae619b7520d66f97f', $payment->getRedirectUrl());
 	}
 
-	public function testGenerateUrl2()
+	public function testGenerateUrl2() : void
 	{
 		$payment = $this->createPayment();
 

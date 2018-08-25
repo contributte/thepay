@@ -12,9 +12,7 @@ application:
 		*: Test\App\*Module\Presenters\*Presenter
 
 services:
-	#routing.router:
-	#	autowired: no
 	router: Tests\Router\Factory()::createRouter
-	#simpleRouter: Nette\Application\Routers\SimpleRouter
+
 	url: Nette\Http\Url('http://localhost.tld/')
 	application.linkGenerator: Nette\Application\LinkGenerator(@router, @url)

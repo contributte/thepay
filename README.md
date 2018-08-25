@@ -1,44 +1,60 @@
-ThePay
-======
+# Contributte > ThePay
 
-[![Latest stable](https://img.shields.io/packagist/v/trejjam/thepay.svg)](https://packagist.org/packages/trejjam/thepay)
-[![Build Status](https://travis-ci.org/Trejjam/ThePay.svg?branch=master)](https://travis-ci.org/Trejjam/ThePay)
+-----
 
-Installation
-------------
+[![Build Status](https://img.shields.io/travis/contributte/thepay.svg?style=flat-square)](https://travis-ci.org/contributte/thepay)
+[![Code coverage](https://img.shields.io/coveralls/contributte/thepay.svg?style=flat-square)](https://coveralls.io/r/contributte/thepay)
+[![Licence](https://img.shields.io/packagist/l/contributte/thepay.svg?style=flat-square)](https://packagist.org/packages/contributte/thepay)
 
-The best way to install trejjam/thepay is using  [Composer](http://getcomposer.org/):
+[![Downloads this Month](https://img.shields.io/packagist/dm/contributte/thepay.svg?style=flat-square)](https://packagist.org/packages/contributte/thepay)
+[![Downloads total](https://img.shields.io/packagist/dt/contributte/thepay.svg?style=flat-square)](https://packagist.org/packages/contributte/thepay)
+[![Latest stable](https://img.shields.io/packagist/v/contributte/thepay.svg?style=flat-square)](https://packagist.org/packages/contributte/thepay)
 
-```sh
-$ composer require trejjam/thepay
+## Discussion / Help
+
+[![Join the chat](https://img.shields.io/gitter/room/contributte/thepay.svg?style=flat-square)](http://bit.ly/ctteg)
+
+## Install
+
+```
+composer require contributte/thepay
 ```
 
-Configuration
--------------
+## Versions
 
-```yml
-extensions:
-	trejjam.thepay: Trejjam\ThePay\DI\ThePayExtension
+| State       | Version | Branch   | PHP      |
+|-------------|---------|----------|----------|
+| dev         | `^4.0`  | `master` | `>= 7.1` |
+| stable      | `^4.0`  | `master` | `>= 7.1` |
+| stable      | `^3.0`  | `master` | `>= 5.6` |
 
-trejjam.thepay:
-	demo: true #if is true, extension rewrite merchant values
-	merchant:
-		gateUrl: 'https://www.thepay.cz/gate/'
-		merchantId: (int)
-		accountId: (int)
-		password: ''
-		dataApiPassword: ''
-		webServicesWsdl: 'https://www.thepay.cz/gate/api/api-demo.wsdl'
-		dataWebServicesWsdl: 'https://www.thepay.cz/gate/api/data-demo.wsdl'
-```
+## Links
 
-Minimal production configuration:
-```yml
-trejjam.thepay:
-	demo: false
-	merchant:
-		merchantId: (int)
-		accountId: (int)
-		password: ''
-		dataApiPassword: ''
-```
+- [Official library & documentations](https://www.thepay.cz/ke-stazeni/)
+
+## Maintainers
+
+<table>
+  <tbody>
+    <tr>
+      <td align="center">
+        <a href="https://github.com/trejjam">
+            <img width="150" height="150" src="https://avatars2.githubusercontent.com/u/3594540?s=460&v=4">
+        </a>
+        </br>
+        <a href="https://github.com/trejjam">Jan Trejbal</a>
+      </td>
+      <td align="center">
+        <a href="https://github.com/f3l1x">
+            <img width="150" height="150" src="https://avatars2.githubusercontent.com/u/538058?v=3&s=150">
+        </a>
+        </br>
+        <a href="https://github.com/f3l1x">Milan Felix Šulc</a>
+      </td>
+    </tr>
+  <tbody>
+</table>
+
+-----
+
+Thank you for testing, reporting and contributing.

@@ -1,12 +1,18 @@
 <?php
 declare(strict_types=1);
 
-namespace Trejjam\ThePay\DI;
+namespace Contributte\ThePay\DI;
 
+use Contributte\ThePay\Helper\DataApi;
+use Contributte\ThePay\Helper\IRadioMerchant;
+use Contributte\ThePay\IPayment;
+use Contributte\ThePay\IPermanentPayment;
+use Contributte\ThePay\IReturnedPayment;
+use Contributte\ThePay\MerchantConfig;
 use Nette\Utils\Validators;
-use Trejjam;
+use Trejjam\BaseExtension\DI\BaseExtension;
 
-class ThePayExtension extends Trejjam\BaseExtension\DI\BaseExtension
+class ThePayExtension extends BaseExtension
 {
 	protected $default = [
 		'demo'     => true,
@@ -32,15 +38,15 @@ class ThePayExtension extends Trejjam\BaseExtension\DI\BaseExtension
 	];
 
 	protected $classesDefinition = [
-		'merchantConfig' => Trejjam\ThePay\MerchantConfig::class,
-		'helper.dataApi' => Trejjam\ThePay\Helper\DataApi::class,
+		'merchantConfig' => MerchantConfig::class,
+		'helper.dataApi' => DataApi::class,
 	];
 
 	protected $factoriesDefinition = [
-		'paymentFactory'              => Trejjam\ThePay\IPayment::class,
-		'permanentPaymentFactory'     => Trejjam\ThePay\IPermanentPayment::class,
-		'returnedPaymentFactory'      => Trejjam\ThePay\IReturnedPayment::class,
-		'helper.radioMerchantFactory' => Trejjam\ThePay\Helper\IRadioMerchant::class,
+		'paymentFactory'              => IPayment::class,
+		'permanentPaymentFactory'     => IPermanentPayment::class,
+		'returnedPaymentFactory'      => IReturnedPayment::class,
+		'helper.radioMerchantFactory' => IRadioMerchant::class,
 	];
 
 	public function loadConfiguration(bool $validateConfig = true) : void

@@ -1,21 +1,21 @@
 <?php
 declare(strict_types=1);
 
-namespace Trejjam\ThePay;
+namespace Contributte\ThePay;
 
-use Nette;
+use Nette\Application\LinkGenerator;
 use Tp;
 
 class PermanentPayment extends Tp\PermanentPayment
 {
 	/**
-	 * @var Nette\Application\LinkGenerator
+	 * @var LinkGenerator
 	 */
 	protected $linkGenerator;
 
 	public function __construct(
 		MerchantConfig $config,
-		Nette\Application\LinkGenerator $linkGenerator
+		LinkGenerator $linkGenerator
 	) {
 		parent::__construct($config, null, null, null);
 

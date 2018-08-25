@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Trejjam\ThePay\Helper;
+namespace Contributte\ThePay\Helper;
 
 use Tp\Helper\RadioMerchant;
 

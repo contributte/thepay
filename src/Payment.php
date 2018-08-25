@@ -1,27 +1,32 @@
 <?php
 declare(strict_types=1);
 
-namespace Trejjam\ThePay;
+namespace Contributte\ThePay;
 
-use Nette;
-use Tp;
+use Nette\Application\LinkGenerator;
+use Nette\Application\UI\InvalidLinkException;
+use Nette\Application\UI\Presenter;
+use Tp\Payment as TpPayment;
 
-class Payment extends Tp\Payment
+class Payment extends TpPayment
 {
 	/**
-	 * @var Nette\Application\LinkGenerator
+	 * @var LinkGenerator
 	 */
 	protected $linkGenerator;
 
 	public function __construct(
 		MerchantConfig $config,
-		Nette\Application\LinkGenerator $linkGenerator
+		LinkGenerator $linkGenerator
 	) {
 		parent::__construct($config);
 
 		$this->linkGenerator = $linkGenerator;
 	}
 
+	/**
+	 * @throws InvalidLinkException
+	 */
 	public function setReturnUrl(
 		string $returnUrl,
 		array $params = []
@@ -36,7 +41,7 @@ class Payment extends Tp\Payment
 	/**
 	 * @param string|null $backToEshopUrl
 	 *
-	 * @throws Nette\Application\UI\InvalidLinkException
+	 * @throws InvalidLinkException
 	 */
 	public function setBackToEshopUrl(
 		?string $backToEshopUrl = null,
@@ -60,7 +65,7 @@ class Payment extends Tp\Payment
 		return $this->getMerchantConfig()->gateUrl . '?' . http_build_query($queryArgs);
 	}
 
-	public function redirectOnlinePayment(Nette\Application\UI\Presenter $presenter) : void
+	public function redirectOnlinePayment(Presenter $presenter) : void
 	{
 		$presenter->redirectUrl($this->getRedirectUrl());
 	}

@@ -1,11 +1,11 @@
 <?php
 declare(strict_types=1);
 
-namespace Trejjam\ThePay;
+namespace Contributte\ThePay;
 
-use Tp;
+use Tp\MerchantConfig as TpMerchantConfig;
 
-class MerchantConfig extends Tp\MerchantConfig
+class MerchantConfig extends TpMerchantConfig
 {
 	/**
 	 * @var bool

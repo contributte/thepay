@@ -1,5 +1,5 @@
 {
-	"name": "trejjam/thepay",
+	"name": "contributte/thepay",
 	"description": "ThePay library - nette extension",
 	"keywords": [
 		"the pay",
@@ -11,7 +11,7 @@
 	],
 	"require": {
 		"php": ">=7.1",
-		"trejjam/thepay-lib": "^4.0.0",
+		"contributte/thepay-lib": "^4.0.0",
 		"trejjam/base-extension": "~0.7",
 		"nette/di": "~2.3 || ~3.0",
 		"nette/application": "~2.3",
@@ -29,7 +29,7 @@
 	},
 	"autoload": {
 		"psr-4": {
-			"Trejjam\\ThePay\\": "src/"
+			"Contributte\\ThePay\\": "src/"
 		}
 	},
 	"autoload-dev": {
