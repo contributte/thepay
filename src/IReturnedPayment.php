@@ -1,9 +1,10 @@
-<?php
-declare(strict_types=1);
+<?php declare(strict_types = 1);
 
 namespace Contributte\ThePay;
 
 interface IReturnedPayment
 {
-	public function create() : ReturnedPayment;
+
+	public function create(): ReturnedPayment;
+
 }

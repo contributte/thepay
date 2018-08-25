@@ -1,5 +1,4 @@
-<?php
-declare(strict_types=1);
+<?php declare(strict_types = 1);
 
 namespace Contributte\ThePay;
 
@@ -10,20 +9,19 @@ use Tp;
 
 class ReturnedPayment extends Tp\ReturnedPayment
 {
-	/**
-	 * @var IRequest
-	 */
+
+	/** @var IRequest */
 	protected $request;
-	/**
-	 * @var LinkGenerator
-	 */
+
+	/** @var LinkGenerator */
 	protected $linkGenerator;
 
 	public function __construct(
 		MerchantConfig $config,
 		IRequest $request,
 		LinkGenerator $linkGenerator
-	) {
+	)
+	{
 		$this->request = $request;
 
 		parent::__construct($config, $this->request->getQuery());
@@ -37,7 +35,8 @@ class ReturnedPayment extends Tp\ReturnedPayment
 	public function setReturnUrl(
 		string $returnUrl,
 		array $params = []
-	) : void {
+	): void
+	{
 		if (preg_match('~^([\w:]+):(\w*+)(#.*)?()\z~', $returnUrl)) {
 			$returnUrl = $this->linkGenerator->link($returnUrl, $params);
 		}
@@ -46,14 +45,13 @@ class ReturnedPayment extends Tp\ReturnedPayment
 	}
 
 	/**
-	 * @param string|null $backToEshopUrl
-	 *
 	 * @throws InvalidLinkException
 	 */
 	public function setBackToEshopUrl(
 		?string $backToEshopUrl = null,
 		array $params = []
-	) : void {
+	): void
+	{
 		if (
 			$backToEshopUrl !== null
 			&& preg_match('~^([\w:]+):(\w*+)(#.*)?()\z~', $backToEshopUrl)
@@ -64,7 +62,7 @@ class ReturnedPayment extends Tp\ReturnedPayment
 		parent::setBackToEshopUrl($backToEshopUrl);
 	}
 
-	public function __debugInfo() : array
+	public function __debugInfo(): array
 	{
 		$out = [];
 
@@ -75,11 +73,12 @@ class ReturnedPayment extends Tp\ReturnedPayment
 		return $out;
 	}
 
-	public function __sleep() : array
+	public function __sleep(): array
 	{
 		return array_diff(array_keys(get_object_vars($this)), [
 			'request',
 			'linkGenerator',
 		]);
 	}
+
 }

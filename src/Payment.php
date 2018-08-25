@@ -1,5 +1,4 @@
-<?php
-declare(strict_types=1);
+<?php declare(strict_types = 1);
 
 namespace Contributte\ThePay;
 
@@ -10,15 +9,15 @@ use Tp\Payment as TpPayment;
 
 class Payment extends TpPayment
 {
-	/**
-	 * @var LinkGenerator
-	 */
+
+	/** @var LinkGenerator */
 	protected $linkGenerator;
 
 	public function __construct(
 		MerchantConfig $config,
 		LinkGenerator $linkGenerator
-	) {
+	)
+	{
 		parent::__construct($config);
 
 		$this->linkGenerator = $linkGenerator;
@@ -30,7 +29,8 @@ class Payment extends TpPayment
 	public function setReturnUrl(
 		string $returnUrl,
 		array $params = []
-	) : void {
+	): void
+	{
 		if (preg_match('~^([\w:]+):(\w*+)(#.*)?()\z~', $returnUrl)) {
 			$returnUrl = $this->linkGenerator->link($returnUrl, $params);
 		}
@@ -39,14 +39,13 @@ class Payment extends TpPayment
 	}
 
 	/**
-	 * @param string|null $backToEshopUrl
-	 *
 	 * @throws InvalidLinkException
 	 */
 	public function setBackToEshopUrl(
 		?string $backToEshopUrl = null,
 		array $params = []
-	) : void {
+	): void
+	{
 		if (
 			$backToEshopUrl !== null
 			&& preg_match('~^([\w:]+):(\w*+)(#.*)?()\z~', $backToEshopUrl)
@@ -57,7 +56,7 @@ class Payment extends TpPayment
 		parent::setBackToEshopUrl($backToEshopUrl);
 	}
 
-	public function getRedirectUrl() : string
+	public function getRedirectUrl(): string
 	{
 		$queryArgs = $this->getArgs();
 		$queryArgs['signature'] = $this->getSignature();
@@ -65,12 +64,12 @@ class Payment extends TpPayment
 		return $this->getMerchantConfig()->gateUrl . '?' . http_build_query($queryArgs);
 	}
 
-	public function redirectOnlinePayment(Presenter $presenter) : void
+	public function redirectOnlinePayment(Presenter $presenter): void
 	{
 		$presenter->redirectUrl($this->getRedirectUrl());
 	}
 
-	public function __debugInfo() : array
+	public function __debugInfo(): array
 	{
 		$out = [];
 
@@ -81,10 +80,11 @@ class Payment extends TpPayment
 		return $out;
 	}
 
-	public function __sleep() : array
+	public function __sleep(): array
 	{
 		return array_diff(array_keys(get_object_vars($this)), [
 			'linkGenerator',
 		]);
 	}
+
 }

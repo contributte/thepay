@@ -1,5 +1,4 @@
-<?php
-declare(strict_types=1);
+<?php declare(strict_types = 1);
 
 namespace Contributte\ThePay;
 
@@ -7,17 +6,16 @@ use Tp\MerchantConfig as TpMerchantConfig;
 
 class MerchantConfig extends TpMerchantConfig
 {
-	/**
-	 * @var bool
-	 */
+
+	/** @var bool */
 	public $isDemo = false;
-	/**
-	 * @var string
-	 */
+
+	/** @var string */
 	public $resourceUrl = 'https://www.thepay.cz/gate';
 
-	public function isDemo() : bool
+	public function isDemo(): bool
 	{
 		return $this->isDemo;
 	}
+
 }

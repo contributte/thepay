@@ -1,9 +1,10 @@
-<?php
-declare(strict_types=1);
+<?php declare(strict_types = 1);
 
 namespace Contributte\ThePay;
 
 interface IPayment
 {
-	public function create() : Payment;
+
+	public function create(): Payment;
+
 }

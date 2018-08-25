@@ -1,45 +1,64 @@
 {
-	"name": "contributte/thepay",
-	"description": "ThePay library - nette extension",
-	"keywords": [
-		"the pay",
-		"nette",
-		"extension"
-	],
-	"license": [
-		"MIT"
-	],
-	"require": {
-		"php": ">=7.1",
-		"contributte/thepay-lib": "^4.0.0",
-		"trejjam/base-extension": "~0.7",
-		"nette/di": "~2.3 || ~3.0",
-		"nette/application": "~2.3",
+  "name": "contributte/thepay",
+  "description": "ThePay library - nette extension",
+  "keywords": [
+    "the pay",
+    "nette",
+    "extension"
+  ],
+  "license": [
+    "MIT"
+  ],
+  "require": {
+    "php": ">=7.1",
+    "contributte/thepay-lib": "^4.0.0",
+    "trejjam/base-extension": "~0.7",
+    "nette/di": "~2.3 || ~3.0",
+    "nette/application": "~2.3",
 
-		"ext-soap": "*"
-	},
-	"require-dev": {
-		"nette/tester": "@dev",
-		"nette/bootstrap": "@dev",
-		"nette/robot-loader": "@dev",
-		"tracy/tracy": "~2.5.0",
+    "ext-soap": "*"
+  },
+  "require-dev": {
+    "nette/tester": "@dev",
+    "nette/bootstrap": "@dev",
+    "nette/robot-loader": "@dev",
+    "tracy/tracy": "~2.5.0",
 
-		"phpstan/phpstan": "~0.10.2",
-		"symplify/easy-coding-standard": "~4.6.0"
-	},
-	"autoload": {
-		"psr-4": {
-			"Contributte\\ThePay\\": "src/"
-		}
-	},
-	"autoload-dev": {
-		"psr-4": {
-			"Tests\\": "tests/src/"
-		}
-	},
-	"extra": {
-		"branch-alias": {
-			"dev-master": "v4.0.x-dev"
-		}
-	}
+    "phpstan/phpstan": "~0.10.2",
+    "phpstan/phpstan-strict-rules": "~0.10.1",
+    "ninjify/qa": "^0.8.0@dev",
+    "ninjify/coding-standard": "^0.7.0@dev",
+    "ninjify/nunjuck": "^0.2.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "Contributte\\ThePay\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Tests\\": "tests/src/"
+    }
+  },
+  "prefer-stable": true,
+  "scripts": {
+    "qa": [
+      "linter src tests/cases",
+      "codesniffer src tests/cases"
+    ],
+    "tester": [
+      "tester -s -p php --colors 1 -C -d soap.so tests/cases"
+    ],
+    "coverage": [
+      "tester -s -p php --colors 1 -C -d soap.so -d extension=xdebug.so --coverage coverage.xml --coverage-src src tests/cases"
+    ],
+    "phpstan": [
+      "phpstan analyse -l max -c tests/config/phpstan.neon src tests/cases"
+    ]
+  },
+  "extra": {
+    "branch-alias": {
+      "dev-master": "v4.0.x-dev"
+    }
+  }
 }

@@ -1,5 +1,4 @@
-<?php
-declare(strict_types=1);
+<?php declare(strict_types = 1);
 
 namespace Contributte\ThePay\DI;
 
@@ -14,6 +13,7 @@ use Trejjam\BaseExtension\DI\BaseExtension;
 
 class ThePayExtension extends BaseExtension
 {
+
 	protected $default = [
 		'demo'     => true,
 		'merchant' => [
@@ -49,7 +49,7 @@ class ThePayExtension extends BaseExtension
 		'helper.radioMerchantFactory' => IRadioMerchant::class,
 	];
 
-	public function loadConfiguration(bool $validateConfig = true) : void
+	public function loadConfiguration(bool $validateConfig = true): void
 	{
 		parent::loadConfiguration();
 
@@ -69,7 +69,7 @@ class ThePayExtension extends BaseExtension
 		Validators::assertField($this->config['merchant'], 'dataWebServicesWsdl', 'string');
 	}
 
-	public function beforeCompile() : void
+	public function beforeCompile(): void
 	{
 		parent::beforeCompile();
 
@@ -99,4 +99,5 @@ class ThePayExtension extends BaseExtension
 				]
 			);
 	}
+
 }

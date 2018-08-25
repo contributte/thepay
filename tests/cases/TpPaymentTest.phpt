@@ -1,32 +1,28 @@
-<?php
-declare(strict_types=1);
+<?php declare(strict_types = 1);
 
 namespace Tests;
 
 use Contributte\ThePay\MerchantConfig;
 use Contributte\ThePay\Payment;
-use Nette\DI\Container;
 use Nette\Application\LinkGenerator;
 use Nette\Application\UI\InvalidLinkException;
-use Tp\InvalidParameterException;
+use Nette\DI\Container;
 use Tester;
 use Tester\Assert;
-use Trejjam;
+use Tp\InvalidParameterException;
 
 $container = require_once dirname(__DIR__) . '/bootstrap.php';
 
 class TpPaymentTest extends Tester\TestCase
 {
-	/**
-	 * @var LinkGenerator
-	 */
+
+	/** @var LinkGenerator */
 	protected $linkGenerator;
-	/**
-	 * @var Container
-	 */
+
+	/** @var Container */
 	private $container;
 
-	function __construct(Container $container)
+	public function __construct(Container $container)
 	{
 		$this->container = $container;
 	}
@@ -45,7 +41,7 @@ class TpPaymentTest extends Tester\TestCase
 	 * @throws InvalidLinkException
 	 * @throws InvalidParameterException
 	 */
-	protected function createPayment() : Payment
+	protected function createPayment(): Payment
 	{
 		$payment = new Payment($this->createConfig(), $this->linkGenerator);
 
@@ -60,7 +56,7 @@ class TpPaymentTest extends Tester\TestCase
 		return $payment;
 	}
 
-	public function testGenerateUrl() : void
+	public function testGenerateUrl(): void
 	{
 		$payment = $this->createPayment();
 
@@ -70,7 +66,7 @@ class TpPaymentTest extends Tester\TestCase
 		Assert::same('https://www.thepay.cz/demo-gate/?merchantId=1&accountId=1&value=2000.23&currency=CZK&merchantData=24&returnUrl=http%3A%2F%2Fgoogle.com&backToEshopUrl=http%3A%2F%2Fgoogle.com&methodId=21&merchantSpecificSymbol=10&signature=2baf4a3c6274180ae619b7520d66f97f', $payment->getRedirectUrl());
 	}
 
-	public function testGenerateUrl2() : void
+	public function testGenerateUrl2(): void
 	{
 		$payment = $this->createPayment();
 
@@ -81,6 +77,7 @@ class TpPaymentTest extends Tester\TestCase
 
 		Assert::same('https://www.thepay.cz/demo-gate/?merchantId=1&accountId=1&value=23.79&currency=CZK&merchantData=24&returnUrl=http%3A%2F%2Fgoogle.com&backToEshopUrl=http%3A%2F%2Fgoogle.com&methodId=21&merchantSpecificSymbol=10&signature=84f06619bb9b039757f0254db9178e9c', $payment->getRedirectUrl());
 	}
+
 }
 
 $test = new TpPaymentTest($container);
