@@ -28,6 +28,12 @@ composer require contributte/thepay
 | stable      | `^4.0`  | `master` | `>= 7.1` |
 | stable      | `^3.0`  | `master` | `>= 5.6` |
 
+## Overview
+
+- [Configuration](https://github.com/contributte/thepay/blob/master/.docs/README.md#configuration)
+- [Factories available in DI container](https://github.com/contributte/thepay/blob/master/.docs/README.md#factories-available-in-di-container)
+- [Services available in DI container](https://github.com/contributte/thepay/blob/master/.docs/README.md#services-available-in-di-container)
+
 ## Links
 
 - [Official library & documentations](https://www.thepay.cz/ke-stazeni/)
