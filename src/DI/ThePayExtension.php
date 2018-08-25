@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace Trejjam\ThePay\DI;
 
+use Nette\Utils\Validators;
 use Trejjam;
 
 class ThePayExtension extends Trejjam\BaseExtension\DI\BaseExtension
@@ -11,8 +12,8 @@ class ThePayExtension extends Trejjam\BaseExtension\DI\BaseExtension
 		'demo'     => true,
 		'merchant' => [
 			'gateUrl'             => 'https://www.thepay.cz/gate/',
-			'merchantId'          => '',
-			'accountId'           => '',
+			'merchantId'          => null,
+			'accountId'           => null,
 			'password'            => '',
 			'dataApiPassword'     => '',
 			'webServicesWsdl'     => 'https://www.thepay.cz/gate/api/gate-api.wsdl',
@@ -31,24 +32,35 @@ class ThePayExtension extends Trejjam\BaseExtension\DI\BaseExtension
 	];
 
 	protected $classesDefinition = [
-		'merchantConfig' => 'Trejjam\ThePay\MerchantConfig',
-		'helper.dataApi' => 'Trejjam\ThePay\Helper\DataApi',
+		'merchantConfig' => Trejjam\ThePay\MerchantConfig::class,
+		'helper.dataApi' => Trejjam\ThePay\Helper\DataApi::class,
 	];
 
 	protected $factoriesDefinition = [
-		'paymentFactory'              => 'Trejjam\ThePay\IPayment',
-		'permanentPaymentFactory'     => 'Trejjam\ThePay\IPermanentPayment',
-		'returnedPaymentFactory'      => 'Trejjam\ThePay\IReturnedPayment',
-		'helper.radioMerchantFactory' => 'Trejjam\ThePay\Helper\IRadioMerchant',
+		'paymentFactory'              => Trejjam\ThePay\IPayment::class,
+		'permanentPaymentFactory'     => Trejjam\ThePay\IPermanentPayment::class,
+		'returnedPaymentFactory'      => Trejjam\ThePay\IReturnedPayment::class,
+		'helper.radioMerchantFactory' => Trejjam\ThePay\Helper\IRadioMerchant::class,
 	];
 
 	public function loadConfiguration(bool $validateConfig = true) : void
 	{
 		parent::loadConfiguration();
 
+		Validators::assertField($this->config, 'demo', 'bool');
+
 		if ($this->config['demo']) {
 			$this->config['merchant'] = $this->merchantDemo;
 		}
+
+		Validators::assertField($this->config, 'merchant', 'array');
+		Validators::assertField($this->config['merchant'], 'gateUrl', 'string');
+		Validators::assertField($this->config['merchant'], 'merchantId', 'int');
+		Validators::assertField($this->config['merchant'], 'accountId', 'int');
+		Validators::assertField($this->config['merchant'], 'password', 'string');
+		Validators::assertField($this->config['merchant'], 'dataApiPassword', 'string');
+		Validators::assertField($this->config['merchant'], 'webServicesWsdl', 'string');
+		Validators::assertField($this->config['merchant'], 'dataWebServicesWsdl', 'string');
 	}
 
 	public function beforeCompile() : void
@@ -72,8 +84,8 @@ class ThePayExtension extends Trejjam\BaseExtension\DI\BaseExtension
 				[
 					$this->config['demo'],
 					$merchantConfig['gateUrl'],
-					intval($merchantConfig['merchantId']),
-					intval($merchantConfig['accountId']),
+					$merchantConfig['merchantId'],
+					$merchantConfig['accountId'],
 					$merchantConfig['password'],
 					$merchantConfig['dataApiPassword'],
 					$merchantConfig['webServicesWsdl'],
