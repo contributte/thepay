@@ -33,6 +33,7 @@ composer require contributte/thepay
 - [Configuration](https://github.com/contributte/thepay/blob/master/.docs/README.md#configuration)
 - [Factories available in DI container](https://github.com/contributte/thepay/blob/master/.docs/README.md#factories-available-in-di-container)
 - [Services available in DI container](https://github.com/contributte/thepay/blob/master/.docs/README.md#services-available-in-di-container)
+- [Usage](https://github.com/contributte/thepay/blob/master/.docs/README.md#usage)
 
 ## Links
 
