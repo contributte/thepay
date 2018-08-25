@@ -11,7 +11,7 @@
   ],
   "require": {
     "php": ">=7.1",
-    "contributte/thepay-lib": "^4.0.0",
+    "contributte/thepay-api": "^4.0.0",
     "trejjam/base-extension": "~0.7",
     "nette/di": "~2.3 || ~3.0",
     "nette/application": "~2.3",
