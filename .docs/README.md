@@ -134,7 +134,7 @@ class OrderPresenter extend Presenter {
 <ul>
   <li n:foreach="$paymentMethods as $paymentMethodId => $paymentMethod">
     <a n:href="pay paymentMethodId => $paymentMethodId">
-      <img n:if="$paymentMethod->getPaymentIcon() !== null" src="$paymentMethod->getPaymentIcon()" alt="$paymentMethod->getPaymentMethodName()" title="$paymentMethod->getPaymentMethodName()">
+      <img n:if="$paymentMethod->getPaymentIcon() !== null" src="{$paymentMethod->getPaymentIcon()}" alt="{$paymentMethod->getPaymentMethodName()}" title="{$paymentMethod->getPaymentMethodName()}">
       <span n:if="$paymentMethod->getPaymentIcon() === null">{$paymentMethod->getPaymentMethodName()}</span>
     </a>
   </li>
@@ -144,11 +144,18 @@ class OrderPresenter extend Presenter {
 Payment is configured and invoked using following code
 
 ```php
+use Contributte\ThePay\IPayment;
 use Nette\Application\UI\Presenter;
 use Tp\Payment;
 
 class OrderPresenter extend Presenter {
   ...
+  
+  /**
+   * @var IPayment
+   * @inject
+   */
+  public $tpPayment;
 
   public function actionPay(int $paymentMethodId) {
     $payment = $this->tpPayment->create();
@@ -189,7 +196,7 @@ class OrderPresenter extend Presenter {
    * @var IReturnedPayment
    * @inject
    */
-  private $tpReturnedPayment;
+  public $tpReturnedPayment;
   /**
    * @var DataApi
    * @inject
