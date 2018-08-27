@@ -11,23 +11,19 @@
   ],
   "require": {
     "php": ">=7.1",
+    "ext-soap": "*",
     "contributte/thepay-api": "^4.0.0",
-    "trejjam/base-extension": "~0.7",
-    "nette/di": "~2.3 || ~3.0",
-    "nette/application": "~2.3",
-
-    "ext-soap": "*"
+    "nette/di": "^2.3 || ^3.0",
+    "nette/application": "^2.3"
   },
   "require-dev": {
-    "nette/tester": "@dev",
-    "nette/bootstrap": "@dev",
-    "nette/robot-loader": "@dev",
-    "tracy/tracy": "~2.5.0",
-
-    "phpstan/phpstan": "~0.10.2",
-    "phpstan/phpstan-strict-rules": "~0.10.1",
+    "nette/tester": "^2.0.2",
+    "nette/bootstrap": "^2.4.6",
+    "nette/robot-loader": "^3.0.4",
+    "tracy/tracy": "^2.5.0",
+    "phpstan/phpstan": "^0.10.2",
+    "phpstan/phpstan-strict-rules": "^0.10.1",
     "ninjify/qa": "^0.8.0@dev",
-    "ninjify/coding-standard": "^0.7.0@dev",
     "ninjify/nunjuck": "^0.2.0"
   },
   "autoload": {
@@ -40,6 +36,7 @@
       "Tests\\": "tests/src/"
     }
   },
+  "minimum-stability": "dev",
   "prefer-stable": true,
   "scripts": {
     "qa": [
