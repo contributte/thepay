@@ -10,7 +10,6 @@ use Contributte\ThePay\IReturnedPayment;
 use Contributte\ThePay\MerchantConfig;
 use Nette\DI\CompilerExtension;
 use Nette\Utils\Validators;
-use Trejjam\BaseExtension\DI\BaseExtension;
 
 class ThePayExtension extends CompilerExtension
 {
