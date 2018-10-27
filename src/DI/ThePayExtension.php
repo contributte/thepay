@@ -9,6 +9,7 @@ use Contributte\ThePay\IPermanentPayment;
 use Contributte\ThePay\IReturnedPayment;
 use Contributte\ThePay\MerchantConfig;
 use Nette\DI\CompilerExtension;
+use Nette\DI\ContainerBuilder;
 use Nette\Utils\Validators;
 
 class ThePayExtension extends CompilerExtension
@@ -55,16 +56,6 @@ class ThePayExtension extends CompilerExtension
 		Validators::assertField($this->config['merchant'], 'dataApiPassword', 'string');
 		Validators::assertField($this->config['merchant'], 'webServicesWsdl', 'string');
 		Validators::assertField($this->config['merchant'], 'dataWebServicesWsdl', 'string');
-
-		$builder = $this->getContainerBuilder();
-
-		$builder->addDefinition($this->prefix('merchantConfig'))->setType(MerchantConfig::class);
-		$builder->addDefinition($this->prefix('helper.dataApi'))->setType(DataApi::class);
-
-		$builder->addDefinition($this->prefix('paymentFactory'))->setImplement(IPayment::class);
-		$builder->addDefinition($this->prefix('permanentPaymentFactory'))->setImplement(IPermanentPayment::class);
-		$builder->addDefinition($this->prefix('returnedPaymentFactory'))->setImplement(IReturnedPayment::class);
-		$builder->addDefinition($this->prefix('helper.radioMerchantFactory'))->setImplement(IRadioMerchant::class);
 	}
 
 	public function beforeCompile(): void
@@ -75,7 +66,15 @@ class ThePayExtension extends CompilerExtension
 
 		$builder = $this->getContainerBuilder();
 
-		$builder->getDefinition($this->prefix('merchantConfig'))
+		$merchantConfigDefinition = $builder->addDefinition($this->prefix('merchantConfig'))->setType(MerchantConfig::class);
+		$builder->addDefinition($this->prefix('helper.dataApi'))->setType(DataApi::class);
+
+		$this->registerFactory($builder, $this->prefix('paymentFactory'), IPayment::class);
+		$this->registerFactory($builder, $this->prefix('permanentPaymentFactory'), IPermanentPayment::class);
+		$this->registerFactory($builder, $this->prefix('returnedPaymentFactory'), IReturnedPayment::class);
+		$this->registerFactory($builder, $this->prefix('helper.radioMerchantFactory'), IRadioMerchant::class);
+
+		$merchantConfigDefinition
 			->addSetup(
 				'$service->isDemo = ?;' . "\n" .
 				'$service->gateUrl = ?;' . "\n" .
@@ -96,6 +95,15 @@ class ThePayExtension extends CompilerExtension
 					$merchantConfig['dataWebServicesWsdl'],
 				]
 			);
+	}
+
+	private function registerFactory(ContainerBuilder $builder, string $name, string $interface): void
+	{
+		if (method_exists($builder, 'addFactoryDefinition')) {
+			$builder->addFactoryDefinition($name)->setImplement($interface);
+		} else {
+			$builder->addDefinition($name)->setImplement($interface);
+		}
 	}
 
 }

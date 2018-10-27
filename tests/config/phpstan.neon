@@ -1,2 +1,3 @@
 parameters:
-	ignoreErrors: []
+	ignoreErrors:
+	    - '#Method Nette\\DI\\Definitions\\ServiceDefinition::setImplement\(\) invoked with 1 parameter, 0 required\.#'

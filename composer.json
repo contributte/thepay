@@ -14,11 +14,11 @@
     "ext-soap": "*",
     "contributte/thepay-api": "^4.0.0",
     "nette/di": "^2.3 || ^3.0",
-    "nette/application": "^2.3"
+    "nette/application": "^2.3 || ^3.0"
   },
   "require-dev": {
     "nette/tester": "^2.0.2",
-    "nette/bootstrap": "^2.4.6",
+    "nette/bootstrap": "^2.4.6 || ^3.0",
     "nette/robot-loader": "^3.0.4",
     "tracy/tracy": "^2.5.0",
     "phpstan/phpstan": "^0.10.2",
