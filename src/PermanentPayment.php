@@ -50,7 +50,7 @@ class PermanentPayment extends Tp\PermanentPayment
 
 	public function setReturnUrl(string $returnUrl, array $params = []): void
 	{
-		if (preg_match('~^([\w:]+):(\w*+)(#.*)?()\z~', $returnUrl)) {
+		if (preg_match('~^([\w:]+):(\w*+)(#.*)?()\z~', $returnUrl) === 1) {
 			$returnUrl = $this->linkGenerator->link($returnUrl, $params);
 		}
 

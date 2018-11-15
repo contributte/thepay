@@ -1,5 +1,4 @@
-<?php
-declare(strict_types=1);
+<?php declare(strict_types = 1);
 
 require dirname(__DIR__) . '/vendor/autoload.php';
 
@@ -10,16 +9,12 @@ if ( !class_exists('Tester\Assert')) {
 
 Tester\Environment::setup();
 
-$configurator = new Nette\Configurator;
-$configurator->setDebugMode(FALSE);
+$configurator = new Nette\Configurator();
+$configurator->setDebugMode(false);
 
 Tracy\Debugger::$logDirectory = dirname(__DIR__) . '/log';
 //$configurator->enableDebugger(dirname(__DIR__) . '/log');
 $configurator->setTempDirectory(dirname(__DIR__) . '/temp');
-$configurator->createRobotLoader()
-			 ->addDirectory(__DIR__ . '/../src')
-			 ->addDirectory(__DIR__ . '/src')
-			 ->register();
 
 @mkdir(Tracy\Debugger::$logDirectory, 0775);
 

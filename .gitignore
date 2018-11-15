@@ -1,8 +1,11 @@
-.idea
-composer.lock
-composer.phar
-vendor
-temp
-log
+# IDE
+/.idea
 
-tests/php-unix.generated.ini
+# Composer
+/vendor
+/composer.lock
+
+# Tests
+/temp
+/tests/php-unix.generated.ini
+/coverage.xml

@@ -6,26 +6,20 @@
     "nette",
     "extension"
   ],
-  "license": [
-    "MIT"
-  ],
+  "license": "MIT",
   "require": {
     "php": ">=7.1",
     "ext-soap": "*",
     "contributte/thepay-api": "^4.0.0",
-    "nette/di": "^2.3 || ^3.0",
-    "nette/application": "^2.4.4 || ^3.0",
-    "nette/http": "^2.3 || ^3.0"
+    "nette/di": "^2.4.14 || ^3.0",
+    "nette/application": "^2.4.11 || ^3.0",
+    "nette/http": "^2.4 || ^3.0"
   },
   "require-dev": {
-    "nette/tester": "^2.0.2",
     "nette/bootstrap": "^2.4.6 || ^3.0",
-    "nette/robot-loader": "^3.0.4",
     "tracy/tracy": "^2.5.0",
-    "phpstan/phpstan": "^0.10.2",
-    "phpstan/phpstan-strict-rules": "^0.10.1",
-    "ninjify/qa": "^0.8.0@dev",
-    "ninjify/nunjuck": "^0.2.0"
+    "ninjify/qa": "^0.8.0",
+    "ninjify/nunjuck": "^0.2.1"
   },
   "autoload": {
     "psr-4": {
@@ -34,7 +28,7 @@
   },
   "autoload-dev": {
     "psr-4": {
-      "Tests\\": "tests/src/"
+      "Tests\\": "tests/fixtures/"
     }
   },
   "minimum-stability": "dev",
@@ -44,14 +38,21 @@
       "linter src tests/cases",
       "codesniffer src tests/cases"
     ],
-    "tester": [
+    "tests": [
       "tester -s -p php --colors 1 -C -d soap.so tests/cases"
     ],
     "coverage": [
       "tester -s -p phpdbg --colors 1 -C -d soap.so -d extension=xdebug.so --coverage ./coverage.xml --coverage-src ./src ./tests/cases"
     ],
+    "phpstan-install": [
+      "mkdir -p temp/phpstan",
+      "composer require -d temp/phpstan phpstan/phpstan:^0.10",
+      "composer require -d temp/phpstan phpstan/phpstan-deprecation-rules:^0.10",
+      "composer require -d temp/phpstan phpstan/phpstan-nette:^0.10",
+      "composer require -d temp/phpstan phpstan/phpstan-strict-rules:^0.10"
+    ],
     "phpstan": [
-      "phpstan analyse -l max -c tests/config/phpstan.neon src tests/cases"
+      "temp/phpstan/vendor/bin/phpstan analyse -l max -c phpstan.neon src tests/cases"
     ]
   },
   "extra": {
