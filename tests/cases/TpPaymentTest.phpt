@@ -34,7 +34,7 @@ class TpPaymentTest extends Tester\TestCase
 
 	protected function createConfig()
 	{
-		return new MerchantConfig;
+		return new MerchantConfig();
 	}
 
 	/**
