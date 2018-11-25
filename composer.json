@@ -14,7 +14,8 @@
     "ext-soap": "*",
     "contributte/thepay-api": "^4.0.0",
     "nette/di": "^2.3 || ^3.0",
-    "nette/application": "^2.3 || ^3.0"
+    "nette/application": "^2.4.4 || ^3.0",
+    "nette/http": "^2.3 || ^3.0"
   },
   "require-dev": {
     "nette/tester": "^2.0.2",
