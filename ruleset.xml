@@ -31,27 +31,6 @@
     <rule ref="SlevomatCodingStandard.TypeHints.TypeHintDeclaration.MissingParameterTypeHint">
         <exclude-pattern>*</exclude-pattern>
     </rule>
-    <rule ref="SlevomatCodingStandard.TypeHints.TypeHintDeclaration.MissingTraversablePropertyTypeHintSpecification">
-        <exclude-pattern>*</exclude-pattern>
-    </rule>
-    <rule ref="SlevomatCodingStandard.TypeHints.TypeHintDeclaration.MissingTraversableReturnTypeHintSpecification">
-        <exclude-pattern>*</exclude-pattern>
-    </rule>
-
-    <rule ref="SlevomatCodingStandard.Functions.UnusedParameter.UnusedParameter">
-        <exclude-pattern>*</exclude-pattern>
-    </rule>
-
-    <rule ref="SlevomatCodingStandard.ControlStructures.NewWithParentheses.MissingParentheses">
-        <exclude-pattern>*</exclude-pattern>
-    </rule>
-
-    <rule ref="Squiz.Commenting.VariableComment.MissingVar">
-        <exclude-pattern>*</exclude-pattern>
-    </rule>
-    <rule ref="Squiz.Commenting.VariableComment.Missing">
-        <exclude-pattern>*</exclude-pattern>
-    </rule>
 
     <rule ref="Squiz.Strings.DoubleQuoteUsage.ContainsVar">
         <exclude-pattern>*</exclude-pattern>

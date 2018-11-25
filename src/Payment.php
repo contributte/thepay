@@ -31,7 +31,7 @@ class Payment extends TpPayment
 		array $params = []
 	): void
 	{
-		if (preg_match('~^([\w:]+):(\w*+)(#.*)?()\z~', $returnUrl)) {
+		if (preg_match('~^([\w:]+):(\w*+)(#.*)?()\z~', $returnUrl) === 1) {
 			$returnUrl = $this->linkGenerator->link($returnUrl, $params);
 		}
 
@@ -48,7 +48,7 @@ class Payment extends TpPayment
 	{
 		if (
 			$backToEshopUrl !== null
-			&& preg_match('~^([\w:]+):(\w*+)(#.*)?()\z~', $backToEshopUrl)
+			&& preg_match('~^([\w:]+):(\w*+)(#.*)?()\z~', $backToEshopUrl) === 1
 		) {
 			$backToEshopUrl = $this->linkGenerator->link($backToEshopUrl, $params);
 		}
@@ -69,6 +69,9 @@ class Payment extends TpPayment
 		$presenter->redirectUrl($this->getRedirectUrl());
 	}
 
+	/**
+	 * @return mixed[]
+	 */
 	public function __debugInfo(): array
 	{
 		$out = [];
@@ -80,6 +83,9 @@ class Payment extends TpPayment
 		return $out;
 	}
 
+	/**
+	 * @return mixed[]
+	 */
 	public function __sleep(): array
 	{
 		return array_diff(array_keys(get_object_vars($this)), [

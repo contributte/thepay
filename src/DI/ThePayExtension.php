@@ -15,6 +15,7 @@ use Nette\Utils\Validators;
 class ThePayExtension extends CompilerExtension
 {
 
+	/** @var mixed[] */
 	protected $default = [
 		'demo'     => true,
 		'merchant' => [
@@ -28,6 +29,7 @@ class ThePayExtension extends CompilerExtension
 		],
 	];
 
+	/** @var mixed[] */
 	protected $merchantDemo = [
 		'gateUrl'             => 'https://www.thepay.cz/demo-gate/',
 		'merchantId'          => 1,
@@ -44,7 +46,7 @@ class ThePayExtension extends CompilerExtension
 
 		Validators::assertField($this->config, 'demo', 'bool');
 
-		if ($this->config['demo']) {
+		if ($this->config['demo'] === true) {
 			$this->config['merchant'] = $this->merchantDemo;
 		}
 
