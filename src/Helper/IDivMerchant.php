@@ -1,5 +1,4 @@
-<?php
-declare(strict_types=1);
+<?php declare(strict_types = 1);
 
 namespace Contributte\ThePay\Helper;
 
@@ -9,6 +8,6 @@ use Tp\Payment;
 interface IDivMerchant
 {
 
-    public function create(Payment $payment) : DivMerchant;
+	public function create(Payment $payment): DivMerchant;
 
 }
