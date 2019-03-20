@@ -3,6 +3,7 @@
 namespace Contributte\ThePay\DI;
 
 use Contributte\ThePay\Helper\DataApi;
+use Contributte\ThePay\Helper\IDivMerchant;
 use Contributte\ThePay\Helper\IRadioMerchant;
 use Contributte\ThePay\IPayment;
 use Contributte\ThePay\IPermanentPayment;
@@ -75,6 +76,7 @@ class ThePayExtension extends CompilerExtension
 		$this->registerFactory($builder, $this->prefix('permanentPaymentFactory'), IPermanentPayment::class);
 		$this->registerFactory($builder, $this->prefix('returnedPaymentFactory'), IReturnedPayment::class);
 		$this->registerFactory($builder, $this->prefix('helper.radioMerchantFactory'), IRadioMerchant::class);
+		$this->registerFactory($builder, $this->prefix('helper.divMerchantFactory'), IDivMerchant::class);
 
 		$merchantConfigDefinition
 			->addSetup(
