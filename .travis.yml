@@ -52,6 +52,7 @@ jobs:
     - stage: Outdated Dependencies
       if: branch = master AND type = cron
       php: 7.1
+      allow_failures: true #temporary enable due to missing stable v3.0 of nette/[application|bootstrap]
       script:
         - composer outdated --direct --strict
 
