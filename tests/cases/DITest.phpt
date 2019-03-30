@@ -1,80 +1,80 @@
-<?php
-declare(strict_types=1);
+<?php declare(strict_types = 1);
 
 namespace Tests;
 
 use Contributte\ThePay\DI\ThePayExtension;
-use Nette\DI\Container;
 use Nette\DI\Compiler;
-use Tester\TestCase;
 use Tester\Assert;
+use Tester\TestCase;
 
 require __DIR__ . '/../bootstrap.php';
 
 final class DITest extends TestCase
 {
-    private const NAME = 'contributte.thepay';
 
-    public function testDemoConfig()
-    {
-        $thePayExtension = new ThePayExtension;
+	private const NAME = 'contributte.thepay';
 
-        $compiler = new Compiler;
-        $compiler->addExtension(self::NAME, $thePayExtension);
-        $compiler->addConfig(
-            [
-                self::NAME => [
-                    'demo' => true,
-                ],
-            ]
-        );
-        $compiler->processExtensions();
+	public function testDemoConfig()
+	{
+		$thePayExtension = new ThePayExtension();
 
-        $thePayConfig = $thePayExtension->getConfig();
+		$compiler = new Compiler();
+		$compiler->addExtension(self::NAME, $thePayExtension);
+		$compiler->addConfig(
+			[
+				self::NAME => [
+					'demo' => true,
+				],
+			]
+		);
+		$compiler->processExtensions();
 
-        Assert::same(true, $thePayConfig->demo);
-        Assert::same('https://www.thepay.cz/demo-gate/', $thePayConfig->merchant->gateUrl);
-        Assert::same(1, $thePayConfig->merchant->merchantId);
-        Assert::same(1, $thePayConfig->merchant->accountId);
-        Assert::same('my$up3rsecr3tp4$$word', $thePayConfig->merchant->password);
-        Assert::same('my$up3rsecr3tp4$$word', $thePayConfig->merchant->dataApiPassword);
-        Assert::same('https://www.thepay.cz/demo-gate/api/gate-api-demo.wsdl', $thePayConfig->merchant->webServicesWsdl);
-        Assert::same('https://www.thepay.cz/demo-gate/api/data-demo.wsdl', $thePayConfig->merchant->dataWebServicesWsdl);
-    }
+		$thePayConfig = $thePayExtension->getConfig();
 
-    public function testProductionConfig()
-    {
-        $thePayExtension = new ThePayExtension;
+		Assert::same(true, $thePayConfig->demo);
+		Assert::same('https://www.thepay.cz/demo-gate/', $thePayConfig->merchant->gateUrl);
+		Assert::same(1, $thePayConfig->merchant->merchantId);
+		Assert::same(1, $thePayConfig->merchant->accountId);
+		Assert::same('my$up3rsecr3tp4$$word', $thePayConfig->merchant->password);
+		Assert::same('my$up3rsecr3tp4$$word', $thePayConfig->merchant->dataApiPassword);
+		Assert::same('https://www.thepay.cz/demo-gate/api/gate-api-demo.wsdl', $thePayConfig->merchant->webServicesWsdl);
+		Assert::same('https://www.thepay.cz/demo-gate/api/data-demo.wsdl', $thePayConfig->merchant->dataWebServicesWsdl);
+	}
 
-        $compiler = new Compiler;
-        $compiler->addExtension(self::NAME, $thePayExtension);
-        $compiler->addConfig(
-            [
-                self::NAME => [
-                    'demo'     => false,
-                    'merchant' => [
-                        'merchantId'      => 10,
-                        'accountId'       => 42,
-                        'password'        => 'abc',
-                        'dataApiPassword' => 'def',
-                    ],
-                ],
-            ]
-        );
-        $compiler->processExtensions();
+	public function testProductionConfig()
+	{
+		$thePayExtension = new ThePayExtension();
 
-        $thePayConfig = $thePayExtension->getConfig();
+		$compiler = new Compiler();
+		$compiler->addExtension(self::NAME, $thePayExtension);
+		$compiler->addConfig(
+			[
+				self::NAME => [
+					'demo'     => false,
+					'merchant' => [
+						'merchantId'      => 10,
+						'accountId'       => 42,
+						'password'        => 'abc',
+						'dataApiPassword' => 'def',
+					],
+				],
+			]
+		);
+		$compiler->processExtensions();
 
-        Assert::same(false, $thePayConfig->demo);
-        Assert::same('https://www.thepay.cz/gate/', $thePayConfig->merchant->gateUrl);
-        Assert::same(10, $thePayConfig->merchant->merchantId);
-        Assert::same(42, $thePayConfig->merchant->accountId);
-        Assert::same('abc', $thePayConfig->merchant->password);
-        Assert::same('def', $thePayConfig->merchant->dataApiPassword);
-        Assert::same('https://www.thepay.cz/gate/api/gate-api.wsdl', $thePayConfig->merchant->webServicesWsdl);
-        Assert::same('https://www.thepay.cz/gate/api/data.wsdl', $thePayConfig->merchant->dataWebServicesWsdl);
-    }
+		$thePayConfig = $thePayExtension->getConfig();
+
+		Assert::same(false, $thePayConfig->demo);
+		Assert::same('https://www.thepay.cz/gate/', $thePayConfig->merchant->gateUrl);
+		Assert::same(10, $thePayConfig->merchant->merchantId);
+		Assert::same(42, $thePayConfig->merchant->accountId);
+		Assert::same('abc', $thePayConfig->merchant->password);
+		Assert::same('def', $thePayConfig->merchant->dataApiPassword);
+		Assert::same('https://www.thepay.cz/gate/api/gate-api.wsdl', $thePayConfig->merchant->webServicesWsdl);
+		Assert::same('https://www.thepay.cz/gate/api/data.wsdl', $thePayConfig->merchant->dataWebServicesWsdl);
+	}
+
 }
 
-$test = new DITest;
+$test = new DITest();
 $test->run();

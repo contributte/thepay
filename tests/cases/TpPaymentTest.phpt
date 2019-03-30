@@ -7,8 +7,8 @@ use Contributte\ThePay\Payment;
 use Nette\Application\LinkGenerator;
 use Nette\Application\UI\InvalidLinkException;
 use Nette\DI\Container;
-use Tester\TestCase;
 use Tester\Assert;
+use Tester\TestCase;
 use Tp\InvalidParameterException;
 
 $container = require_once dirname(__DIR__) . '/bootstrap.php';

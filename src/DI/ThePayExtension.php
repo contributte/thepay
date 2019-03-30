@@ -1,4 +1,4 @@
-<?php declare(strict_types=1);
+<?php declare(strict_types = 1);
 
 namespace Contributte\ThePay\DI;
 
@@ -14,12 +14,15 @@ use Nette\DI\CompilerExtension;
 use Nette\DI\Config\Expect;
 use Nette\DI\ContainerBuilder;
 use Nette\Utils\Validators;
+use stdClass;
 
 class ThePayExtension extends CompilerExtension
 {
+
 	/**
 	 * pre Nette 3.0 compatibility
-	 * @var \stdClass
+	 *
+	 * @var stdClass
 	 */
 	private $shadowConfig;
 
@@ -27,33 +30,43 @@ class ThePayExtension extends CompilerExtension
 	{
 		$this->config = new class
 		{
+
 			/** @var bool */
 			public $demo;
-			/** @var \stdClass */
+
+			/** @var stdClass */
 			public $merchant;
 
 			public function __construct()
 			{
 				$this->merchant = new class
 				{
+
 					/** @var string */
 					public $gateUrl = 'https://www.thepay.cz/gate/';
+
 					/** @var int */
 					public $merchantId;
+
 					/** @var int */
 					public $accountId;
+
 					/** @var string */
 					public $password;
+
 					/** @var string */
 					public $dataApiPassword;
+
 					/** @var string */
 					public $webServicesWsdl = 'https://www.thepay.cz/gate/api/gate-api.wsdl';
+
 					/** @var string */
 					public $dataWebServicesWsdl = 'https://www.thepay.cz/gate/api/data.wsdl';
+
 				};
 			}
 
-			public function setDemoMerchant() : void
+			public function setDemoMerchant(): void
 			{
 				$this->merchant->gateUrl = 'https://www.thepay.cz/demo-gate/';
 				$this->merchant->merchantId = 1;
@@ -63,6 +76,7 @@ class ThePayExtension extends CompilerExtension
 				$this->merchant->webServicesWsdl = 'https://www.thepay.cz/demo-gate/api/gate-api-demo.wsdl';
 				$this->merchant->dataWebServicesWsdl = 'https://www.thepay.cz/demo-gate/api/data-demo.wsdl';
 			}
+
 		};
 
 		if (!method_exists(get_parent_class($this), 'getConfigSchema')) {
@@ -71,13 +85,13 @@ class ThePayExtension extends CompilerExtension
 		}
 	}
 
-	public function getConfigSchema() : Nette\DI\Config\Schema
+	public function getConfigSchema(): Nette\DI\Config\Schema
 	{
 		return Expect::from($this->config)->normalize(
 			function (array $config) {
 				if ($config['demo'] === true) {
 					$this->config->setDemoMerchant();
-					$config['merchant'] = (array)$this->config->merchant;
+					$config['merchant'] = (array) $this->config->merchant;
 				}
 
 				return $config;
@@ -85,14 +99,14 @@ class ThePayExtension extends CompilerExtension
 		);
 	}
 
-	public function loadConfiguration() : void
+	public function loadConfiguration(): void
 	{
 		if (!method_exists(get_parent_class($this), 'getConfigSchema')) {
 			// pre Nette 3.0 compatibility
 
-			$config = (array)$this->shadowConfig;
+			$config = (array) $this->shadowConfig;
 			$config['demo'] = true; // Backward compatibility
-			$config['merchant'] = (array)$this->shadowConfig->merchant;
+			$config['merchant'] = (array) $this->shadowConfig->merchant;
 
 			$this->validateConfig($config);
 
@@ -100,7 +114,7 @@ class ThePayExtension extends CompilerExtension
 
 			if ($this->config['demo'] === true) {
 				$this->shadowConfig->setDemoMerchant();
-				$this->config['merchant'] = (array)$this->shadowConfig->merchant;
+				$this->config['merchant'] = (array) $this->shadowConfig->merchant;
 			}
 
 			Validators::assertField($this->config, 'merchant', 'array');
@@ -112,12 +126,12 @@ class ThePayExtension extends CompilerExtension
 			Validators::assertField($this->config['merchant'], 'webServicesWsdl', 'string');
 			Validators::assertField($this->config['merchant'], 'dataWebServicesWsdl', 'string');
 
-			$this->config = (object)$this->config;
-			$this->config->merchant = (object)$this->config->merchant;
+			$this->config = (object) $this->config;
+			$this->config->merchant = (object) $this->config->merchant;
 		}
 	}
 
-	public function beforeCompile() : void
+	public function beforeCompile(): void
 	{
 		parent::beforeCompile();
 
@@ -157,12 +171,11 @@ class ThePayExtension extends CompilerExtension
 			);
 	}
 
-	private function registerFactory(ContainerBuilder $builder, string $name, string $interface) : void
+	private function registerFactory(ContainerBuilder $builder, string $name, string $interface): void
 	{
 		if (method_exists($builder, 'addFactoryDefinition')) {
 			$builder->addFactoryDefinition($name)->setImplement($interface);
-		}
-		else {
+		} else {
 			$builder->addDefinition($name)->setImplement($interface);
 		}
 	}
