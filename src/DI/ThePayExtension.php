@@ -14,70 +14,23 @@ use Nette\DI\CompilerExtension;
 use Nette\DI\Config\Expect;
 use Nette\DI\ContainerBuilder;
 use Nette\Utils\Validators;
-use stdClass;
 
+/**
+ * @property ExtensionConfiguration $config pre Nette 3.0 compatibility
+ */
 class ThePayExtension extends CompilerExtension
 {
 
 	/**
 	 * pre Nette 3.0 compatibility
 	 *
-	 * @var stdClass
+	 * @var ExtensionConfiguration
 	 */
 	private $shadowConfig;
 
 	public function __construct()
 	{
-		$this->config = new class
-		{
-
-			/** @var bool */
-			public $demo;
-
-			/** @var stdClass */
-			public $merchant;
-
-			public function __construct()
-			{
-				$this->merchant = new class
-				{
-
-					/** @var string */
-					public $gateUrl = 'https://www.thepay.cz/gate/';
-
-					/** @var int */
-					public $merchantId;
-
-					/** @var int */
-					public $accountId;
-
-					/** @var string */
-					public $password;
-
-					/** @var string */
-					public $dataApiPassword;
-
-					/** @var string */
-					public $webServicesWsdl = 'https://www.thepay.cz/gate/api/gate-api.wsdl';
-
-					/** @var string */
-					public $dataWebServicesWsdl = 'https://www.thepay.cz/gate/api/data.wsdl';
-
-				};
-			}
-
-			public function setDemoMerchant(): void
-			{
-				$this->merchant->gateUrl = 'https://www.thepay.cz/demo-gate/';
-				$this->merchant->merchantId = 1;
-				$this->merchant->accountId = 1;
-				$this->merchant->password = 'my$up3rsecr3tp4$$word';
-				$this->merchant->dataApiPassword = 'my$up3rsecr3tp4$$word';
-				$this->merchant->webServicesWsdl = 'https://www.thepay.cz/demo-gate/api/gate-api-demo.wsdl';
-				$this->merchant->dataWebServicesWsdl = 'https://www.thepay.cz/demo-gate/api/data-demo.wsdl';
-			}
-
-		};
+		$this->config = new ExtensionConfiguration();
 
 		if (!method_exists(get_parent_class($this), 'getConfigSchema')) {
 			// pre Nette 3.0 compatibility
