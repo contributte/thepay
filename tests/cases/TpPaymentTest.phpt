@@ -13,7 +13,7 @@ use Tp\InvalidParameterException;
 
 $container = require_once dirname(__DIR__) . '/bootstrap.php';
 
-class TpPaymentTest extends TestCase
+final class TpPaymentTest extends TestCase
 {
 
 	/** @var LinkGenerator */

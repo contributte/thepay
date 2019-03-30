@@ -9,5 +9,5 @@ application:
 services:
 	router: Tests\Router\Factory()::createRouter
 
-	url: Nette\Http\Url('http://localhost.tld/')
+	url: Nette\Http\UrlScript('http://localhost.tld/')
 	application.linkGenerator: Nette\Application\LinkGenerator(@router, @url)
