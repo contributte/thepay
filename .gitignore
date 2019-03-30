@@ -9,3 +9,4 @@
 /temp
 /tests/php-unix.generated.ini
 /coverage.xml
+/php-coveralls.phar
