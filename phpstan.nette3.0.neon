@@ -1,0 +1,18 @@
+parameters:
+	reportUnmatchedIgnoredErrors: false
+	ignoreErrors:
+		- # pre Nette 3.0 compatibility
+			message: '~^Parameter #1 \$arr of static method Nette\\Utils\\Validators::assertField\(\) expects array, Contributte\\ThePay\\DI\\ExtensionConfiguration given\.$~'
+			path: %currentWorkingDirectory%/src/DI/ThePayExtension.php
+		- # pre Nette 3.0 compatibility
+			message: "~^Call to function method_exists\\(\\) with Nette\\\\DI\\\\ContainerBuilder and 'addFactoryDefinition' will always evaluate to true.$~"
+			path: %currentWorkingDirectory%/src/DI/ThePayExtension.php
+		- # pre Nette 3.0 compatibility
+			message: '~^Call to deprecated method setImplement\(\) of class Nette\\DI\\Definitions\\ServiceDefinition\.$~'
+			path: %currentWorkingDirectory%/src/DI/ThePayExtension.php
+		- # pre Nette 3.0 compatibility
+			message: '~^Method Nette\\DI\\Definitions\\ServiceDefinition::setImplement\(\) invoked with 1 parameter, 0 required\.$~'
+			path: %currentWorkingDirectory%/src/DI/ThePayExtension.php
+
+includes:
+	- phpstan.neon

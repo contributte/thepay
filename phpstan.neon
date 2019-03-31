@@ -1,10 +1,10 @@
 parameters:
 	ignoreErrors:
 		- # pre Nette 3.0 compatibility
-			message: '~^Return typehint of method Contributte\\ThePay\\DI\\ThePayExtension::getConfigSchema\(\) has invalid type Nette\\DI\\Config\\Schema.$~'
+			message: '~^Return typehint of method Contributte\\ThePay\\DI\\ThePayExtension::getConfigSchema\(\) has invalid type Nette\\DI\\Config\\Schema\.$~'
 			path: %currentWorkingDirectory%/src/DI/ThePayExtension.php
 		- # pre Nette 3.0 compatibility
-			message: "~Call to function method_exists\\(\\) with '.*' and 'getConfigSchema' will always evaluate to false.~"
+			message: "~^Call to function method_exists\\(\\) with '.*' and 'getConfigSchema' will always evaluate to false.$~"
 			path: %currentWorkingDirectory%/src/DI/ThePayExtension.php
 		- # pre Nette 3.0 compatibility
 			message: ~^Cannot access offset 'demo' on Contributte\\ThePay\\DI\\ExtensionConfiguration\.$~
