@@ -24,6 +24,9 @@ parameters:
 		- # pre Nette 3.0 compatibility
 			message: ~^Casting to Contributte\\ThePay\\DI\\MerchantConfiguration something that's already Contributte\\ThePay\\DI\\MerchantConfiguration\.$~
 			path: %currentWorkingDirectory%/src/DI/ThePayExtension.php
+		- # pre Nette 3.0 compatibility
+			message: '~^Property Contributte\\ThePay\\DI\\ThePayExtension::\$config \(Contributte\\ThePay\\DI\\ExtensionConfiguration\) does not accept array\.$~'
+			path: %currentWorkingDirectory%/src/DI/ThePayExtension.php
 
 		- # hack for debugger
 			message: '~^Variable property access on \$this\(Contributte\\ThePay\\Payment\)\.$~'
