@@ -35,6 +35,7 @@ class ThePayExtension extends CompilerExtension
 		if (!method_exists(get_parent_class($this), 'getConfigSchema')) {
 			// pre Nette 3.0 compatibility
 			$this->shadowConfig = $this->config;
+			$this->config = [];
 		}
 	}
 
