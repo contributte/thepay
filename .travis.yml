@@ -29,24 +29,6 @@ jobs:
       script:
         - composer run-script tests
 
-    - env: title="Bleeding edge dependencies 7.3"
-      allow_failures: true
-      php: 7.3
-      install:
-        - composer config minimum-stability RC
-        - travis_retry composer require nette/di:^3.0 nette/application:^3.0 nette/http:^3.0 nette/bootstrap:^3.0 nette/component-model:^3.0 nette/utils:^3.0
-        - travis_retry composer update --no-progress --prefer-dist
-
-        - mkdir -p temp/phpstan
-        - composer init -d temp/phpstan -n
-        - composer config  -d temp/phpstan minimum-stability RC
-        - travis_retry composer require -d temp/phpstan nette/di:^3.0
-        - composer run-script phpstan-install
-      script:
-        - composer run-script tests
-
-        - composer run-script -- phpstan -c phpstan.nette3.0.neon
-
     - stage: Quality Assurance
       php: 7.1
       script:
@@ -56,7 +38,7 @@ jobs:
       php: 7.1
       script:
         - composer run-script phpstan-install
-        - composer run-script phpstan
+        - composer run-script -- phpstan -c phpstan.nette3.0.neon # clear me with Nette v3 only release
 
     - stage: Test Coverage
       if: branch = master AND type = push
@@ -70,7 +52,6 @@ jobs:
     - stage: Outdated Dependencies
       if: branch = master AND type = cron
       php: 7.1
-      allow_failures: true #temporary enable due to missing stable v3.0 of nette/[application|bootstrap]
       script:
         - composer outdated --direct --strict
 

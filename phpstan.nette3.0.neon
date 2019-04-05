@@ -13,6 +13,9 @@ parameters:
 		- # pre Nette 3.0 compatibility
 			message: '~^Method Nette\\DI\\Definitions\\ServiceDefinition::setImplement\(\) invoked with 1 parameter, 0 required\.$~'
 			path: %currentWorkingDirectory%/src/DI/ThePayExtension.php
+		- # pre Nette 3.0 compatibility
+			message: '~^Call to deprecated method validateConfig\(\) of class Nette\\DI\\CompilerExtension\.$~'
+			path: %currentWorkingDirectory%/src/DI/ThePayExtension.php
 
 includes:
 	- phpstan.neon

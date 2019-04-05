@@ -9,10 +9,10 @@ use Contributte\ThePay\IPayment;
 use Contributte\ThePay\IPermanentPayment;
 use Contributte\ThePay\IReturnedPayment;
 use Contributte\ThePay\MerchantConfig;
-use Nette;
 use Nette\DI\CompilerExtension;
-use Nette\DI\Config\Expect;
 use Nette\DI\ContainerBuilder;
+use Nette\Schema\Expect;
+use Nette\Schema\Schema;
 use Nette\Utils\Validators;
 
 /**
@@ -39,9 +39,9 @@ class ThePayExtension extends CompilerExtension
 		}
 	}
 
-	public function getConfigSchema(): Nette\DI\Config\Schema
+	public function getConfigSchema(): Schema
 	{
-		return Expect::from($this->config)->normalize(
+		return Expect::from($this->config)->before(
 			function (array $config) {
 				if ($config['demo'] === true) {
 					$this->config->setDemoMerchant();
