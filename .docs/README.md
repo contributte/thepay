@@ -96,6 +96,7 @@ final class PaymentMethodDTO {
 Prepare list of available payment methods
 
 `OrderPresenter.php`:
+
 ```php
 use Contributte\ThePay\Helper\DataApi;
 use Contributte\ThePay\Helper\IPaymentMethod;
@@ -130,7 +131,8 @@ class OrderPresenter extend Presenter {
 ```
 
 `Order/listMethods.latte`:
-```latte
+
+```smarty
 <ul>
   <li n:foreach="$paymentMethods as $paymentMethodId => $paymentMethod">
     <a n:href="pay paymentMethodId => $paymentMethodId">
