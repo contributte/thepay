@@ -1,4 +1,4 @@
-<?php declare(strict_types=1);
+<?php declare(strict_types = 1);
 
 namespace Contributte\ThePay\DI;
 
@@ -16,21 +16,22 @@ use Nette\Schema\Schema;
 
 class ThePayExtension extends CompilerExtension
 {
+
 	/** @var ExtensionConfiguration */
 	protected $config;
 
 	public function __construct()
 	{
-		$this->config = new ExtensionConfiguration;
+		$this->config = new ExtensionConfiguration();
 	}
 
-	public function getConfigSchema() : Schema
+	public function getConfigSchema(): Schema
 	{
 		return Expect::from($this->config)->before(
-			function (array $config) : array {
+			function (array $config): array {
 				if ($config['demo'] === true) {
 					$this->config->setDemoMerchant();
-					$config['merchant'] = (array)$this->config->merchant;
+					$config['merchant'] = (array) $this->config->merchant;
 				}
 
 				return $config;
@@ -38,7 +39,7 @@ class ThePayExtension extends CompilerExtension
 		);
 	}
 
-	public function beforeCompile() : void
+	public function beforeCompile(): void
 	{
 		parent::beforeCompile();
 
@@ -78,7 +79,7 @@ class ThePayExtension extends CompilerExtension
 			);
 	}
 
-	private function registerFactory(ContainerBuilder $builder, string $name, string $interface) : void
+	private function registerFactory(ContainerBuilder $builder, string $name, string $interface): void
 	{
 		$builder->addFactoryDefinition($name)->setImplement($interface);
 	}

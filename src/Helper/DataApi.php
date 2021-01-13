@@ -40,7 +40,7 @@ class DataApi
 	 */
 	public function getPaymentMethodIcon(Parameters\MerchantAccountMethod $method, string $type = 'tight'): string
 	{
-		return "{$this->config->resourceUrl}/images/logos/public/{$type}/{$method->getId()}.png";
+		return sprintf('%s/images/logos/public/%s/%s.png', $this->config->resourceUrl, $type, $method->getId());
 	}
 
 	public function getPayment(int $paymentId): GetPaymentResponse
