@@ -1,42 +1,8 @@
 parameters:
 	ignoreErrors:
-		- # pre Nette 3.0 compatibility
-			message: '~^Return typehint of method Contributte\\ThePay\\DI\\ThePayExtension::getConfigSchema\(\) has invalid type Nette\\DI\\Config\\Schema\.$~'
-			path: %currentWorkingDirectory%/src/DI/ThePayExtension.php
-		- # pre Nette 3.0 compatibility
-			message: "~^Call to function method_exists\\(\\) with '.*' and 'getConfigSchema' will always evaluate to false.$~"
-			path: %currentWorkingDirectory%/src/DI/ThePayExtension.php
-		- # pre Nette 3.0 compatibility
-			message: ~^Cannot access offset 'demo' on Contributte\\ThePay\\DI\\ExtensionConfiguration\.$~
-			path: %currentWorkingDirectory%/src/DI/ThePayExtension.php
-		- # pre Nette 3.0 compatibility
-			message: ~^Cannot access offset 'merchant' on Contributte\\ThePay\\DI\\ExtensionConfiguration\.$~
-			path: %currentWorkingDirectory%/src/DI/ThePayExtension.php
-		- # pre Nette 3.0 compatibility
-			message: ~^Cannot assign offset 'merchant' to Contributte\\ThePay\\DI\\ExtensionConfiguration\.$~
-			path: %currentWorkingDirectory%/src/DI/ThePayExtension.php
-		- # pre Nette 3.0 compatibility
-			message: '~^Call to static method from\(\) on an unknown class Nette\\Schema\\Expect\.$~'
-			path: %currentWorkingDirectory%/src/DI/ThePayExtension.php
-		- # pre Nette 3.0 compatibility
-			message: ~^Casting to Contributte\\ThePay\\DI\\ExtensionConfiguration something that's already Contributte\\ThePay\\DI\\ExtensionConfiguration\.$~
-			path: %currentWorkingDirectory%/src/DI/ThePayExtension.php
-		- # pre Nette 3.0 compatibility
-			message: ~^Casting to Contributte\\ThePay\\DI\\MerchantConfiguration something that's already Contributte\\ThePay\\DI\\MerchantConfiguration\.$~
-			path: %currentWorkingDirectory%/src/DI/ThePayExtension.php
-		- # pre Nette 3.0 compatibility
-			message: '~^Property Contributte\\ThePay\\DI\\ThePayExtension::\$config \(Contributte\\ThePay\\DI\\ExtensionConfiguration\) does not accept array\.$~'
-			path: %currentWorkingDirectory%/src/DI/ThePayExtension.php
-
 		- # hack for debugger
 			message: '~^Variable property access on \$this\(Contributte\\ThePay\\Payment\)\.$~'
 			path: %currentWorkingDirectory%/src/Payment.php
 		- # hack for debugger
 			message: '~^Variable property access on \$this\(Contributte\\ThePay\\ReturnedPayment\)\.$~'
 			path: %currentWorkingDirectory%/src/ReturnedPayment.php
-
-includes:
-	- temp/phpstan/vendor/phpstan/phpstan-deprecation-rules/rules.neon
-	- temp/phpstan/vendor/phpstan/phpstan-nette/extension.neon
-	- temp/phpstan/vendor/phpstan/phpstan-nette/rules.neon
-	- temp/phpstan/vendor/phpstan/phpstan-strict-rules/rules.neon
