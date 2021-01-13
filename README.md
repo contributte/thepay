@@ -2,17 +2,19 @@
 
 -----
 
-[![Build Status](https://img.shields.io/travis/contributte/thepay.svg?style=flat-square)](https://travis-ci.org/contributte/thepay)
-[![Code coverage](https://img.shields.io/coveralls/contributte/thepay.svg?style=flat-square)](https://coveralls.io/r/contributte/thepay)
-[![Licence](https://img.shields.io/packagist/l/contributte/thepay.svg?style=flat-square)](https://packagist.org/packages/contributte/thepay)
-[![Downloads this Month](https://img.shields.io/packagist/dm/contributte/thepay.svg?style=flat-square)](https://packagist.org/packages/contributte/thepay)
-[![Downloads total](https://img.shields.io/packagist/dt/contributte/thepay.svg?style=flat-square)](https://packagist.org/packages/contributte/thepay)
-[![Latest stable](https://img.shields.io/packagist/v/contributte/thepay.svg?style=flat-square)](https://packagist.org/packages/contributte/thepay)
-[![PHPStan](https://img.shields.io/badge/PHPStan-enabled-brightgreen.svg?style=flat)](https://github.com/phpstan/phpstan)
-
-## Discussion / Help
-
-[![Join the chat](https://img.shields.io/gitter/room/contributte/thepay.svg?style=flat-square)](http://bit.ly/ctteg)
+<p align=center>
+  <a href="https://github.com/contributte/thepay/actions"><img src="https://badgen.net/github/checks/contributte/thepay/master?cache=300"></a>
+  <a href="https://coveralls.io/r/contributte/thepay"><img src="https://badgen.net/coveralls/c/github/contributte/thepay?cache=300"></a>
+  <a href="https://packagist.org/packages/contributte/thepay"><img src="https://badgen.net/packagist/dm/contributte/thepay"></a>
+  <a href="https://packagist.org/packages/contributte/thepay"><img src="https://badgen.net/packagist/v/contributte/thepay"></a>
+</p>
+<p align=center>
+  <a href="https://packagist.org/packages/contributte/thepay"><img src="https://badgen.net/packagist/php/contributte/thepay"></a>
+  <a href="https://github.com/contributte/thepay"><img src="https://badgen.net/github/license/contributte/thepay"></a>
+  <a href="https://bit.ly/ctteg"><img src="https://badgen.net/badge/support/gitter/cyan"></a>
+  <a href="https://bit.ly/cttfo"><img src="https://badgen.net/badge/support/forum/yellow"></a>
+  <a href="https://contributte.org/partners.html"><img src="https://badgen.net/badge/sponsor/donations/F96854"></a>
+</p>
 
 ## Install
 
