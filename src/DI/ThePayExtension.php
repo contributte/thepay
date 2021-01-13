@@ -1,4 +1,4 @@
-<?php declare(strict_types = 1);
+<?php declare(strict_types=1);
 
 namespace Contributte\ThePay\DI;
 
@@ -13,39 +13,24 @@ use Nette\DI\CompilerExtension;
 use Nette\DI\ContainerBuilder;
 use Nette\Schema\Expect;
 use Nette\Schema\Schema;
-use Nette\Utils\Validators;
 
-/**
- * @property ExtensionConfiguration $config pre Nette 3.0 compatibility
- */
 class ThePayExtension extends CompilerExtension
 {
-
-	/**
-	 * pre Nette 3.0 compatibility
-	 *
-	 * @var ExtensionConfiguration
-	 */
-	private $shadowConfig;
+	/** @var ExtensionConfiguration */
+	protected $config;
 
 	public function __construct()
 	{
-		$this->config = new ExtensionConfiguration();
-
-		if (!method_exists(get_parent_class($this), 'getConfigSchema')) {
-			// pre Nette 3.0 compatibility
-			$this->shadowConfig = $this->config;
-			$this->config = [];
-		}
+		$this->config = new ExtensionConfiguration;
 	}
 
-	public function getConfigSchema(): Schema
+	public function getConfigSchema() : Schema
 	{
 		return Expect::from($this->config)->before(
-			function (array $config) {
+			function (array $config) : array {
 				if ($config['demo'] === true) {
 					$this->config->setDemoMerchant();
-					$config['merchant'] = (array) $this->config->merchant;
+					$config['merchant'] = (array)$this->config->merchant;
 				}
 
 				return $config;
@@ -53,39 +38,7 @@ class ThePayExtension extends CompilerExtension
 		);
 	}
 
-	public function loadConfiguration(): void
-	{
-		if (!method_exists(get_parent_class($this), 'getConfigSchema')) {
-			// pre Nette 3.0 compatibility
-
-			$config = (array) $this->shadowConfig;
-			$config['demo'] = true; // Backward compatibility
-			$config['merchant'] = (array) $this->shadowConfig->merchant;
-
-			$this->validateConfig($config);
-
-			Validators::assertField($this->config, 'demo', 'bool');
-
-			if ($this->config['demo'] === true) {
-				$this->shadowConfig->setDemoMerchant();
-				$this->config['merchant'] = (array) $this->shadowConfig->merchant;
-			}
-
-			Validators::assertField($this->config, 'merchant', 'array');
-			Validators::assertField($this->config['merchant'], 'gateUrl', 'string');
-			Validators::assertField($this->config['merchant'], 'merchantId', 'int');
-			Validators::assertField($this->config['merchant'], 'accountId', 'int');
-			Validators::assertField($this->config['merchant'], 'password', 'string');
-			Validators::assertField($this->config['merchant'], 'dataApiPassword', 'string');
-			Validators::assertField($this->config['merchant'], 'webServicesWsdl', 'string');
-			Validators::assertField($this->config['merchant'], 'dataWebServicesWsdl', 'string');
-
-			$this->config = (object) $this->config;
-			$this->config->merchant = (object) $this->config->merchant;
-		}
-	}
-
-	public function beforeCompile(): void
+	public function beforeCompile() : void
 	{
 		parent::beforeCompile();
 
@@ -125,13 +78,9 @@ class ThePayExtension extends CompilerExtension
 			);
 	}
 
-	private function registerFactory(ContainerBuilder $builder, string $name, string $interface): void
+	private function registerFactory(ContainerBuilder $builder, string $name, string $interface) : void
 	{
-		if (method_exists($builder, 'addFactoryDefinition')) {
-			$builder->addFactoryDefinition($name)->setImplement($interface);
-		} else {
-			$builder->addDefinition($name)->setImplement($interface);
-		}
+		$builder->addFactoryDefinition($name)->setImplement($interface);
 	}
 
 }

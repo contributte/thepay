@@ -24,7 +24,7 @@ composer require contributte/thepay
 
 | State       | Version | Branch   | PHP      |
 |-------------|---------|----------|----------|
-| dev         | `^4.1`  | `master` | `>= 7.1` |
+| dev         | `^4.2`  | `master` | `>= 7.1` |
 | stable      | `^4.1`  | `master` | `>= 7.1` |
 | stable      | `^3.0`  | `master` | `>= 5.6` |
 
