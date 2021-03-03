@@ -19,7 +19,7 @@
 ## Install
 
 ```
-composer require contributte/thepay
+$ composer require contributte/thepay
 ```
 
 ## Versions
