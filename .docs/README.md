@@ -57,7 +57,7 @@ contributte.thepay:
 
 ## Usage
 
-Simple DTO for simple and type secure passing payment method information in the template 
+Simple DTO for simple and type secure passing payment method information in the template
 
 `PaymentMethodDTO.php`:
 ```php
@@ -68,7 +68,7 @@ final class PaymentMethodDTO {
   private $paymentIcon;
   /** @var bool */
   private $isPaymentByCard;
-  
+
   public function __construct(
     string $paymentMethodName,
     string $paymentIcon,
@@ -78,15 +78,15 @@ final class PaymentMethodDTO {
     $this->paymentIcon = $paymentIcon;
     $this->isPaymentByCard = $isPaymentByCard;
   }
-  
+
   public function getPaymentMethodName(): string {
     return $this->paymentMethodName;
   }
-  
+
   public function getPaymentIcon(): string {
     return $this->paymentIcon;
   }
-  
+
   public function isPaymentByCard(): bool {
     return $this->isPaymentByCard;
   }
@@ -112,7 +112,7 @@ class OrderPresenter extend Presenter {
   public function renderListMethods() {
     $template = $this->getTemplate();
     $paymentMethods = [];
-  
+
     foreach ($this->thePayDataApi->getPaymentMethods()->getMethods() as $_paymentMethod) {
       $paymentIcon = $this->thePayDataApi->getPaymentMethodIcon($_paymentMethod, '209x127');
       $isPaymentByCard = $_paymentMethod->getId() === IPaymentMethod::CREDIT_CARD_PAYMENT_ID;
@@ -124,7 +124,7 @@ class OrderPresenter extend Presenter {
         $isPaymentByCard
       );
     }
-    
+
     $template->paymentMethods = $paymentMethods;
   }
 }
@@ -132,7 +132,7 @@ class OrderPresenter extend Presenter {
 
 `Order/listMethods.latte`:
 
-```smarty
+```latte
 <ul>
   <li n:foreach="$paymentMethods as $paymentMethodId => $paymentMethod">
     <a n:href="pay paymentMethodId => $paymentMethodId">
@@ -152,7 +152,7 @@ use Tp\Payment;
 
 class OrderPresenter extend Presenter {
   ...
-  
+
   /**
    * @var IPayment
    * @inject
@@ -162,7 +162,7 @@ class OrderPresenter extend Presenter {
   public function actionPay(int $paymentMethodId) {
     $payment = $this->tpPayment->create();
     assert($payment instanceof Payment);
-    
+
     $payment->setMethodId($paymentMethodId);
     $payment->setValue(1000.0);
     $payment->setCurrency('CZK');
@@ -209,7 +209,7 @@ class OrderPresenter extend Presenter {
 
   public function actionOnlineConfirmation(int $cartId) {
     $returnedPayment = $this->tpReturnedPayment->create();
-    
+
     try {
       if ($returnedPayment->verifySignature()) {
         if (in_array($returnedPayment->getStatus(), [
@@ -227,7 +227,7 @@ class OrderPresenter extend Presenter {
           else {
             $paymentId = $returnedPayment->getPaymentId();
             $payment = $this->thePayDataApi->getPayment($paymentId);
-            
+
             if (bccomp(number_format($payment->getPayment()->getValue(), 2, '.', ''), '1000.00', 2) === 0) {
               // everything is ok
             }
