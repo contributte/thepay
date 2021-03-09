@@ -18,8 +18,8 @@
 
 ## Install
 
-```
-$ composer require contributte/thepay
+```bash
+composer require contributte/thepay
 ```
 
 ## Versions
