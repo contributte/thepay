@@ -62,12 +62,9 @@ Simple DTO for simple and type secure passing payment method information in the 
 `PaymentMethodDTO.php`:
 ```php
 final class PaymentMethodDTO {
-	/** @var string */
-	private $paymentMethodName;
-	/** @var string */
-	private $paymentIcon;
-	/** @var bool */
-	private $isPaymentByCard;
+	private string $paymentMethodName;
+	private string $paymentIcon;
+	private bool $isPaymentByCard;
 
 	public function __construct(
 		string $paymentMethodName,
@@ -104,12 +101,11 @@ use Nette\Application\UI\Presenter;
 
 class OrderPresenter extend Presenter {
 	/**
-	 * @var DataApi
 	 * @inject
 	 */
-	public $thePayDataApi;
+	public DataApi $thePayDataApi;
 
-	public function renderListMethods() {
+	public function renderListMethods(): void {
 		$template = $this->getTemplate();
 		$paymentMethods = [];
 
@@ -154,12 +150,11 @@ class OrderPresenter extend Presenter {
 	//...
 
 	/**
-	 * @var IPayment
 	 * @inject
 	 */
-	public $tpPayment;
+	public IPayment $tpPayment;
 
-	public function actionPay(int $paymentMethodId) {
+	public function actionPay(int $paymentMethodId): void {
 		$payment = $this->tpPayment->create();
 		assert($payment instanceof Payment);
 
@@ -195,20 +190,18 @@ use Tp\ReturnedPayment;
 
 class OrderPresenter extend Presenter {
 	/**
-	 * @var IReturnedPayment
 	 * @inject
 	 */
-	public $tpReturnedPayment;
+	public IReturnedPayment $tpReturnedPayment;
 
 	/**
-	 * @var DataApi
 	 * @inject
 	 */
-	public $thePayDataApi;
+	public DataApi $thePayDataApi;
 
 	//...
 
-	public function actionOnlineConfirmation(int $cartId) {
+	public function actionOnlineConfirmation(int $cartId): void {
 		$returnedPayment = $this->tpReturnedPayment->create();
 
 		try {
@@ -217,7 +210,7 @@ class OrderPresenter extend Presenter {
 					ReturnedPayment::STATUS_OK,
 					ReturnedPayment::STATUS_WAITING,
 				], TRUE)) {
-					//Demo gate don't allow active check...
+					//Demo gate doesn't allow active check...
 					if ($this->thePayDataApi->getMerchantConfig()->isDemo()) {
 						//Do not load thePayDataApi->getPayment
 
