@@ -6,6 +6,7 @@
 - [Factories available in DI container](#factories-available-in-di-container)
 - [Services available in DI container](#services-available-in-di-container)
 - [Usage](#usage)
+- [Official documentation](#official-documentation)
 
 ## Configuration
 
@@ -235,3 +236,8 @@ class OrderPresenter extend Presenter {
 	}
 }
 ```
+
+
+## Official documentation
+
+You can find an official documentation with examples here [https://www.thepay.cz/ke-stazeni/](https://www.thepay.cz/ke-stazeni/)
