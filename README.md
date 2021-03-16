@@ -1,10 +1,8 @@
-# Contributte > ThePay
-
------
+![](https://heatbadger.now.sh/github/readme/contributte/thepay/)
 
 <p align=center>
-  <a href="https://github.com/contributte/thepay/actions"><img src="https://badgen.net/github/checks/contributte/thepay/master?cache=300"></a>
-  <a href="https://coveralls.io/r/contributte/thepay"><img src="https://badgen.net/coveralls/c/github/contributte/thepay?cache=300"></a>
+  <a href="https://github.com/contributte/thepay/actions"><img src="https://badgen.net/github/checks/contributte/thepay/master"></a>
+  <a href="https://coveralls.io/r/contributte/thepay"><img src="https://badgen.net/coveralls/c/github/contributte/thepay"></a>
   <a href="https://packagist.org/packages/contributte/thepay"><img src="https://badgen.net/packagist/dm/contributte/thepay"></a>
   <a href="https://packagist.org/packages/contributte/thepay"><img src="https://badgen.net/packagist/v/contributte/thepay"></a>
 </p>
@@ -16,11 +14,21 @@
   <a href="https://contributte.org/partners.html"><img src="https://badgen.net/badge/sponsor/donations/F96854"></a>
 </p>
 
-## Install
+<p align=center>
+Website 🚀 <a href="https://contributte.org">contributte.org</a> | Contact 👨🏻‍💻 <a href="https://f3l1x.io">f3l1x.io</a> | Twitter 🐦 <a href="https://twitter.com/contributte">@contributte</a>
+</p>
+
+## Usage
+
+To install the latest version of `contributte/thepay` use [Composer](https://getcomposer.org).
 
 ```bash
 composer require contributte/thepay
 ```
+
+## Documentation
+
+For details on how to use this package, check out our [documentation](.docs).
 
 ## Versions
 
@@ -30,40 +38,21 @@ composer require contributte/thepay
 | stable      | `^4.1`  | `master` | `>= 7.1` |
 | stable      | `^3.0`  | `master` | `>= 5.6` |
 
-## Overview
+## Development
 
-- [Configuration](https://github.com/contributte/thepay/blob/master/.docs/README.md#configuration)
-- [Factories available in DI container](https://github.com/contributte/thepay/blob/master/.docs/README.md#factories-available-in-di-container)
-- [Services available in DI container](https://github.com/contributte/thepay/blob/master/.docs/README.md#services-available-in-di-container)
-- [Usage](https://github.com/contributte/thepay/blob/master/.docs/README.md#usage)
+See [how to contribute](https://contributte.org/contributing.html) to this package.
 
-## Links
+This package is currently maintaining by these authors.
 
-- [Official library & documentations](https://www.thepay.cz/ke-stazeni/)
 
-## Maintainers
-
-<table>
-  <tbody>
-    <tr>
-      <td align="center">
-        <a href="https://github.com/trejjam">
-            <img width="150" height="150" src="https://avatars2.githubusercontent.com/u/3594540?s=150&v=4">
-        </a>
-        </br>
-        <a href="https://github.com/trejjam">Jan Trejbal</a>
-      </td>
-      <td align="center">
-        <a href="https://github.com/f3l1x">
-            <img width="150" height="150" src="https://avatars2.githubusercontent.com/u/538058?v=3&s=150">
-        </a>
-        </br>
-        <a href="https://github.com/f3l1x">Milan Felix Šulc</a>
-      </td>
-    </tr>
-  </body>
-</table>
+<a href="https://github.com/trejjam">
+  <img width="80" height="80" src="https://avatars2.githubusercontent.com/u/3594540?s=80&v=4">
+</a>
+<a href="https://github.com/f3l1x">
+  <img width="80" height="80" src="https://avatars2.githubusercontent.com/u/538058?s=80&v=4">
+</a>
 
 -----
 
-Thank you for testing, reporting and contributing.
+Consider to [support](https://contributte.org/partners.html) **contributte** development team.
+Also thank you for using this package.
