@@ -1,7 +1,7 @@
 ![](https://heatbadger.now.sh/github/readme/contributte/thepay/)
 
 <p align=center>
-  <a href="https://github.com/contributte/thepay/actions"><img src="https://badgen.net/github/checks/contributte/thepay/master"></a>
+  <a href="https://github.com/contributte/thepay/actions"><img src="https://badgen.net/github/checks/contributte/thepay"></a>
   <a href="https://coveralls.io/r/contributte/thepay"><img src="https://badgen.net/coveralls/c/github/contributte/thepay"></a>
   <a href="https://packagist.org/packages/contributte/thepay"><img src="https://badgen.net/packagist/dm/contributte/thepay"></a>
   <a href="https://packagist.org/packages/contributte/thepay"><img src="https://badgen.net/packagist/v/contributte/thepay"></a>
