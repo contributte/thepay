@@ -1,8 +1,1 @@
 parameters:
-	ignoreErrors:
-		- # hack for debugger
-			message: '~^Variable property access on \$this\(Contributte\\ThePay\\Payment\)\.$~'
-			path: %currentWorkingDirectory%/src/Payment.php
-		- # hack for debugger
-			message: '~^Variable property access on \$this\(Contributte\\ThePay\\ReturnedPayment\)\.$~'
-			path: %currentWorkingDirectory%/src/ReturnedPayment.php
