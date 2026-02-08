@@ -6,7 +6,9 @@
 /composer.lock
 
 # Tests
-/temp
-/tests/php-unix.generated.ini
-/coverage.xml
-/php-coveralls.phar
+/tests/tmp
+/coverage.*
+/tests/**/*.log
+/tests/**/*.html
+/tests/**/*.expected
+/tests/**/*.actual

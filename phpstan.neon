@@ -1,4 +1,19 @@
+includes:
+	- vendor/contributte/phpstan/phpstan.neon
+
 parameters:
+	level: 1
+	phpVersion: 80200
+
+	scanDirectories:
+		- src
+
+	fileExtensions:
+		- php
+
+	paths:
+		- src
+
 	ignoreErrors:
 		- # hack for debugger
 			message: '~^Variable property access on \$this\(Contributte\\ThePay\\Payment\)\.$~'
