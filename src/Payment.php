@@ -10,8 +10,7 @@ use Tp\Payment as TpPayment;
 class Payment extends TpPayment
 {
 
-	/** @var LinkGenerator */
-	protected $linkGenerator;
+	protected LinkGenerator $linkGenerator;
 
 	public function __construct(
 		MerchantConfig $config,
@@ -24,6 +23,7 @@ class Payment extends TpPayment
 	}
 
 	/**
+	 * @param mixed[] $params
 	 * @throws InvalidLinkException
 	 */
 	public function setReturnUrl(
@@ -39,6 +39,7 @@ class Payment extends TpPayment
 	}
 
 	/**
+	 * @param mixed[] $params
 	 * @throws InvalidLinkException
 	 */
 	public function setBackToEshopUrl(

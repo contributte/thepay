@@ -18,7 +18,7 @@ class ThePayExtension extends CompilerExtension
 {
 
 	/** @var ExtensionConfiguration */
-	protected $config;
+	protected $config; // phpcs:ignore SlevomatCodingStandard.TypeHints.PropertyTypeHint.MissingNativeTypeHint
 
 	public function __construct()
 	{

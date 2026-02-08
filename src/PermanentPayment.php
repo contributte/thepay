@@ -8,8 +8,7 @@ use Tp;
 class PermanentPayment extends Tp\PermanentPayment
 {
 
-	/** @var LinkGenerator */
-	protected $linkGenerator;
+	protected LinkGenerator $linkGenerator;
 
 	public function __construct(
 		MerchantConfig $config,
@@ -48,6 +47,9 @@ class PermanentPayment extends Tp\PermanentPayment
 		return $this->returnUrl;
 	}
 
+	/**
+	 * @param mixed[] $params
+	 */
 	public function setReturnUrl(string $returnUrl, array $params = []): void
 	{
 		if (preg_match('~^([\w:]+):(\w*+)(#.*)?()\z~', $returnUrl) === 1) {

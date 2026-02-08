@@ -17,8 +17,7 @@ use Tp\SoapException;
 class DataApi
 {
 
-	/** @var MerchantConfig */
-	protected $config;
+	protected MerchantConfig $config;
 
 	public function __construct(MerchantConfig $config)
 	{
@@ -68,12 +67,11 @@ class DataApi
 	}
 
 	/**
-	 * @param mixed $type
 	 * @throws InvalidSignatureException
 	 * @throws SoapException
 	 */
 	public function setPaymentMethods(
-		$type,
+		mixed $type,
 		?array $paymentMethods = null
 	): SetPaymentMethodsResponse
 	{
