@@ -5,25 +5,18 @@ namespace Contributte\ThePay\DI;
 final class MerchantConfiguration
 {
 
-	/** @var string */
-	public $gateUrl = 'https://www.thepay.cz/gate/';
+	public string $gateUrl = 'https://www.thepay.cz/gate/';
 
-	/** @var int */
-	public $merchantId;
+	public int $merchantId;
 
-	/** @var int */
-	public $accountId;
+	public int $accountId;
 
-	/** @var string */
-	public $password;
+	public string $password;
 
-	/** @var string */
-	public $dataApiPassword;
+	public string $dataApiPassword;
 
-	/** @var string */
-	public $webServicesWsdl = 'https://www.thepay.cz/gate/api/gate-api.wsdl';
+	public string $webServicesWsdl = 'https://www.thepay.cz/gate/api/gate-api.wsdl';
 
-	/** @var string */
-	public $dataWebServicesWsdl = 'https://www.thepay.cz/gate/api/data.wsdl';
+	public string $dataWebServicesWsdl = 'https://www.thepay.cz/gate/api/data.wsdl';
 
 }

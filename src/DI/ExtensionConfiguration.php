@@ -5,15 +5,11 @@ namespace Contributte\ThePay\DI;
 final class ExtensionConfiguration
 {
 
-	/** @var bool */
-	public $demo;
-
-	/** @var MerchantConfiguration */
-	public $merchant;
-
-	public function __construct()
+	public function __construct(
+		public bool $demo = false,
+		public MerchantConfiguration $merchant = new MerchantConfiguration(),
+	)
 	{
-		$this->merchant = new MerchantConfiguration();
 	}
 
 	public function setDemoMerchant(): void

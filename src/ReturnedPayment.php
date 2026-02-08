@@ -10,11 +10,9 @@ use Tp;
 class ReturnedPayment extends Tp\ReturnedPayment
 {
 
-	/** @var IRequest */
-	protected $request;
+	protected IRequest $request;
 
-	/** @var LinkGenerator */
-	protected $linkGenerator;
+	protected LinkGenerator $linkGenerator;
 
 	public function __construct(
 		MerchantConfig $config,
@@ -30,6 +28,7 @@ class ReturnedPayment extends Tp\ReturnedPayment
 	}
 
 	/**
+	 * @param mixed[] $params
 	 * @throws InvalidLinkException
 	 */
 	public function setReturnUrl(
@@ -45,6 +44,7 @@ class ReturnedPayment extends Tp\ReturnedPayment
 	}
 
 	/**
+	 * @param mixed[] $params
 	 * @throws InvalidLinkException
 	 */
 	public function setBackToEshopUrl(
