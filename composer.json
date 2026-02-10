@@ -12,9 +12,9 @@
     "php": "^8.2",
     "ext-soap": "*",
     "contributte/thepay-api": "^4.0.0",
-    "nette/application": "^3.0.0",
-    "nette/di": "^3.0.0",
-    "nette/http": "^3.0.0"
+    "nette/application": "^3.2.0",
+    "nette/di": "^3.2.0",
+    "nette/http": "^3.3.0"
   },
   "require-dev": {
     "contributte/phpstan": "~0.2.0",
