@@ -6,21 +6,21 @@ final class ExtensionConfiguration
 {
 
 	public function __construct(
+		public string $merchantId = '',
+		public int $projectId = 0,
+		public string $apiPassword = '',
+		public string $apiUrl = 'https://api.thepay.cz/',
+		public string $gateUrl = 'https://gate.thepay.cz/',
+		public string $language = 'cs',
 		public bool $demo = false,
-		public MerchantConfiguration $merchant = new MerchantConfiguration(),
 	)
 	{
 	}
 
-	public function setDemoMerchant(): void
+	public function setDemo(): void
 	{
-		$this->merchant->gateUrl = 'https://www.thepay.cz/demo-gate/';
-		$this->merchant->merchantId = 1;
-		$this->merchant->accountId = 1;
-		$this->merchant->password = 'my$up3rsecr3tp4$$word';
-		$this->merchant->dataApiPassword = 'my$up3rsecr3tp4$$word';
-		$this->merchant->webServicesWsdl = 'https://www.thepay.cz/demo-gate/api/gate-api-demo.wsdl';
-		$this->merchant->dataWebServicesWsdl = 'https://www.thepay.cz/demo-gate/api/data-demo.wsdl';
+		$this->apiUrl = 'https://demo.api.thepay.cz/';
+		$this->gateUrl = 'https://demo.gate.thepay.cz/';
 	}
 
 }

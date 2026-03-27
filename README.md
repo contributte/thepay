@@ -34,9 +34,8 @@ For details on how to use this package, check out our [documentation](.docs).
 
 | State       | Version | Branch   | PHP      |
 |-------------|---------|----------|----------|
-| dev         | `^4.2`  | `master` | `>= 7.1` |
-| stable      | `^4.1`  | `master` | `>= 7.1` |
-| stable      | `^3.0`  | `master` | `>= 5.6` |
+| dev         | `^5.0`  | `master` | `>= 8.2` |
+| stable      | `^4.1`  | `v4.x`  | `>= 7.1` |
 
 ## Development
 

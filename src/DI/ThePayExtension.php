@@ -2,17 +2,16 @@
 
 namespace Contributte\ThePay\DI;
 
-use Contributte\ThePay\Helper\DataApi;
-use Contributte\ThePay\Helper\IDivMerchant;
-use Contributte\ThePay\Helper\IRadioMerchant;
-use Contributte\ThePay\IPayment;
-use Contributte\ThePay\IPermanentPayment;
-use Contributte\ThePay\IReturnedPayment;
-use Contributte\ThePay\MerchantConfig;
 use Nette\DI\CompilerExtension;
-use Nette\DI\ContainerBuilder;
 use Nette\Schema\Expect;
 use Nette\Schema\Schema;
+use ThePay\ApiClient\Service\ApiService;
+use ThePay\ApiClient\Service\ApiServiceInterface;
+use ThePay\ApiClient\Service\GateService;
+use ThePay\ApiClient\Service\GateServiceInterface;
+use ThePay\ApiClient\Service\SignatureService;
+use ThePay\ApiClient\TheClient;
+use ThePay\ApiClient\TheConfig;
 
 class ThePayExtension extends CompilerExtension
 {
@@ -29,9 +28,10 @@ class ThePayExtension extends CompilerExtension
 	{
 		return Expect::from($this->config)->before(
 			function (array $config): array {
-				if ($config['demo'] === true) {
-					$this->config->setDemoMerchant();
-					$config['merchant'] = (array) $this->config->merchant;
+				if (($config['demo'] ?? false) === true) {
+					$this->config->setDemo();
+					$config['apiUrl'] = $this->config->apiUrl;
+					$config['gateUrl'] = $this->config->gateUrl;
 				}
 
 				return $config;
@@ -43,45 +43,32 @@ class ThePayExtension extends CompilerExtension
 	{
 		parent::beforeCompile();
 
-		$merchantConfig = $this->config->merchant;
-
 		$builder = $this->getContainerBuilder();
 
-		$merchantConfigDefinition = $builder->addDefinition($this->prefix('merchantConfig'))->setType(MerchantConfig::class);
-		$builder->addDefinition($this->prefix('helper.dataApi'))->setType(DataApi::class);
+		$builder->addDefinition($this->prefix('config'))
+			->setType(TheConfig::class)
+			->setArguments([
+				$this->config->merchantId,
+				$this->config->projectId,
+				$this->config->apiPassword,
+				$this->config->apiUrl,
+				$this->config->gateUrl,
+				$this->config->language,
+			]);
 
-		$this->registerFactory($builder, $this->prefix('paymentFactory'), IPayment::class);
-		$this->registerFactory($builder, $this->prefix('permanentPaymentFactory'), IPermanentPayment::class);
-		$this->registerFactory($builder, $this->prefix('returnedPaymentFactory'), IReturnedPayment::class);
-		$this->registerFactory($builder, $this->prefix('helper.radioMerchantFactory'), IRadioMerchant::class);
-		$this->registerFactory($builder, $this->prefix('helper.divMerchantFactory'), IDivMerchant::class);
+		$builder->addDefinition($this->prefix('signatureService'))
+			->setType(SignatureService::class);
 
-		$merchantConfigDefinition
-			->addSetup(
-				'$service->isDemo = ?;' . "\n" .
-				'$service->gateUrl = ?;' . "\n" .
-				'$service->merchantId = ?;' . "\n" .
-				'$service->accountId = ?;' . "\n" .
-				'$service->password = ?;' . "\n" .
-				'$service->dataApiPassword = ?;' . "\n" .
-				'$service->webServicesWsdl = ?;' . "\n" .
-				'$service->dataWebServicesWsdl = ?',
-				[
-					$this->config->demo,
-					$merchantConfig->gateUrl,
-					$merchantConfig->merchantId,
-					$merchantConfig->accountId,
-					$merchantConfig->password,
-					$merchantConfig->dataApiPassword,
-					$merchantConfig->webServicesWsdl,
-					$merchantConfig->dataWebServicesWsdl,
-				]
-			);
-	}
+		$builder->addDefinition($this->prefix('apiService'))
+			->setType(ApiServiceInterface::class)
+			->setFactory(ApiService::class);
 
-	private function registerFactory(ContainerBuilder $builder, string $name, string $interface): void
-	{
-		$builder->addFactoryDefinition($name)->setImplement($interface);
+		$builder->addDefinition($this->prefix('gateService'))
+			->setType(GateServiceInterface::class)
+			->setFactory(GateService::class);
+
+		$builder->addDefinition($this->prefix('client'))
+			->setType(TheClient::class);
 	}
 
 }
