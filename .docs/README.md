@@ -2,15 +2,32 @@
 
 ## Content
 
+- [Requirements](#requirements)
 - [Configuration](#configuration)
-- [Factories available in DI container](#factories-available-in-di-container)
 - [Services available in DI container](#services-available-in-di-container)
 - [Usage](#usage)
-- [Official documentation](#official-documentation)
+
+## Requirements
+
+This extension requires PSR-18 HTTP client and PSR-17 HTTP factories to be registered in your DI container.
+
+The recommended implementation is [Guzzle](https://github.com/guzzle/guzzle):
+
+```bash
+composer require guzzlehttp/guzzle
+```
+
+You need to register the PSR interfaces in your neon config:
+
+```neon
+services:
+	- GuzzleHttp\Client
+	- GuzzleHttp\Psr7\HttpFactory
+```
 
 ## Configuration
 
-You have to register this extension at first.
+Register the extension:
 
 ```neon
 extensions:
@@ -21,223 +38,129 @@ List of all options:
 
 ```neon
 contributte.thepay:
-	demo: true/false # if is true, extension rewrite merchant values with debug ones
-	merchant:
-		gateUrl: 'https://www.thepay.cz/gate/'
-		merchantId: (int)
-		accountId: (int)
-		password: ''
-		dataApiPassword: ''
-		webServicesWsdl: 'https://www.thepay.cz/gate/api/api-demo.wsdl'
-		dataWebServicesWsdl: 'https://www.thepay.cz/gate/api/data-demo.wsdl'
+	demo: true/false
+	merchantId: 'your-merchant-id'
+	projectId: (int)
+	apiPassword: ''
+	apiUrl: 'https://api.thepay.cz/'
+	gateUrl: 'https://gate.thepay.cz/'
+	language: 'cs'
 ```
 
 Minimal production configuration:
 
 ```neon
 contributte.thepay:
-	demo: false
-	merchant:
-		merchantId: (int)
-		accountId: (int)
-		password: ''
-		dataApiPassword: ''
+	merchantId: 'your-merchant-id'
+	projectId: (int)
+	apiPassword: ''
 ```
 
-## Factories available in DI container
+Demo configuration:
 
-- `Contributte\ThePay\IPayment`
-- `Contributte\ThePay\IPermanentPayment`
-- `Contributte\ThePay\IReturnedPayment`
-- `Contributte\ThePay\Helper\IRadioMerchant`
+```neon
+contributte.thepay:
+	demo: true
+	merchantId: 'your-merchant-id'
+	projectId: (int)
+	apiPassword: ''
+```
+
+When `demo: true` is set, `apiUrl` and `gateUrl` are automatically switched to demo endpoints.
 
 ## Services available in DI container
 
-- `Contributte\ThePay\MerchantConfig`
-- `Contributte\ThePay\Helper\DataApi`
+- `ThePay\ApiClient\TheConfig`
+- `ThePay\ApiClient\Service\SignatureService`
+- `ThePay\ApiClient\Service\ApiService` (implements `ApiServiceInterface`)
+- `ThePay\ApiClient\Service\GateService` (implements `GateServiceInterface`)
+- `ThePay\ApiClient\TheClient`
 
 ## Usage
 
-Simple DTO for simple and type secure passing payment method information in the template
+### Create a payment
 
-`PaymentMethodDTO.php`:
 ```php
-final class PaymentMethodDTO {
-	private string $paymentMethodName;
-	private string $paymentIcon;
-	private bool $isPaymentByCard;
+use ThePay\ApiClient\TheClient;
+use ThePay\ApiClient\Model\CreatePaymentParams;
+use Nette\Application\UI\Presenter;
+
+class OrderPresenter extends Presenter
+{
 
 	public function __construct(
-		string $paymentMethodName,
-		string $paymentIcon,
-		bool $isPaymentByCard
-	) {
-		$this->paymentMethodName = $paymentMethodName;
-		$this->paymentIcon = $paymentIcon;
-		$this->isPaymentByCard = $isPaymentByCard;
+		private TheClient $thePayClient,
+	)
+	{
+		parent::__construct();
 	}
 
-	public function getPaymentMethodName(): string {
-		return $this->paymentMethodName;
+	public function actionPay(): void
+	{
+		$params = new CreatePaymentParams(10000, 'CZK', 'order-123');
+		$payment = $this->thePayClient->createPayment($params);
+
+		$this->redirectUrl($payment->getPayUrl());
 	}
 
-	public function getPaymentIcon(): string {
-		return $this->paymentIcon;
-	}
-
-	public function isPaymentByCard(): bool {
-		return $this->isPaymentByCard;
-	}
 }
 ```
 
-Prepare list of available payment methods
-
-`OrderPresenter.php`:
+### Render payment buttons
 
 ```php
-use Contributte\ThePay\Helper\DataApi;
-use Contributte\ThePay\Helper\IPaymentMethod;
+use ThePay\ApiClient\TheClient;
+use ThePay\ApiClient\Model\CreatePaymentParams;
 use Nette\Application\UI\Presenter;
 
-class OrderPresenter extend Presenter {
-	/**
-	 * @inject
-	 */
-	public DataApi $thePayDataApi;
+class OrderPresenter extends Presenter
+{
 
-	public function renderListMethods(): void {
-		$template = $this->getTemplate();
-		$paymentMethods = [];
-
-		foreach ($this->thePayDataApi->getPaymentMethods()->getMethods() as $_paymentMethod) {
-			$paymentIcon = $this->thePayDataApi->getPaymentMethodIcon($_paymentMethod, '209x127');
-			$isPaymentByCard = $_paymentMethod->getId() === IPaymentMethod::CREDIT_CARD_PAYMENT_ID;
-			$paymentName = $_paymentMethod->getId();
-
-			$paymentMethods[$_paymentMethod->getId()] = new PaymentMethodDTO(
-				$_paymentMethod->getName(),
-				$paymentIcon,
-				$isPaymentByCard
-			);
-		}
-
-		$template->paymentMethods = $paymentMethods;
+	public function __construct(
+		private TheClient $thePayClient,
+	)
+	{
+		parent::__construct();
 	}
+
+	public function renderPaymentMethods(): void
+	{
+		$params = new CreatePaymentParams(10000, 'CZK', 'order-123');
+		$this->template->paymentButtons = $this->thePayClient->getPaymentButtons($params);
+	}
+
 }
 ```
 
-`Order/listMethods.latte`:
-
-```latte
-<ul>
-    <li n:foreach="$paymentMethods as $paymentMethodId => $paymentMethod">
-        <a n:href="pay paymentMethodId => $paymentMethodId">
-            <img n:if="$paymentMethod->getPaymentIcon() !== null" src="{$paymentMethod->getPaymentIcon()}" alt="{$paymentMethod->getPaymentMethodName()}" title="{$paymentMethod->getPaymentMethodName()}">
-            <span n:if="$paymentMethod->getPaymentIcon() === null">{$paymentMethod->getPaymentMethodName()}</span>
-        </a>
-    </li>
-</ul>
-```
-
-Payment is configured and invoked using following code
+### Verify a payment
 
 ```php
-use Contributte\ThePay\IPayment;
+use ThePay\ApiClient\TheClient;
 use Nette\Application\UI\Presenter;
-use Tp\Payment;
 
-class OrderPresenter extend Presenter {
-	//...
+class OrderPresenter extends Presenter
+{
 
-	/**
-	 * @inject
-	 */
-	public IPayment $tpPayment;
-
-	public function actionPay(int $paymentMethodId): void {
-		$payment = $this->tpPayment->create();
-		assert($payment instanceof Payment);
-
-		$payment->setMethodId($paymentMethodId);
-		$payment->setValue(1000.0);
-		$payment->setCurrency('CZK');
-		$payment->setMerchantData('local-payment-unique-id');
-		$payment->setMerchantSpecificSymbol('local-user-id');
-		$payment->setReturnUrl($this->link('//onlineConfirmation', ['cartId' => 'local-payment-unique-id']));
-		$payment->setBackToEshopUrl(
-			'offlineConfirmation',
-			['cartId' => 'local-payment-unique-id']
-		);
-
-		$payment->redirectOnlinePayment($this);
+	public function __construct(
+		private TheClient $thePayClient,
+	)
+	{
+		parent::__construct();
 	}
 
-	...
-}
-```
+	public function actionConfirmation(string $paymentUid): void
+	{
+		$payment = $this->thePayClient->getPayment($paymentUid);
 
-Now is user redirected to ThePay site, when payment is completed we receive:
-- `HEAD` request to action `offlineConfirmation` with specified `cartId`
-- `GET` request to action `onlineConfirmation` with specified `cartId`
-
-In each offline or online action is necessary to active validate received data e.g. like this
-
-```php
-use Contributte\ThePay\Helper\DataApi;
-use Contributte\ThePay\IReturnedPayment;
-use Tp\InvalidSignatureException;
-use Tp\ReturnedPayment;
-
-class OrderPresenter extend Presenter {
-	/**
-	 * @inject
-	 */
-	public IReturnedPayment $tpReturnedPayment;
-
-	/**
-	 * @inject
-	 */
-	public DataApi $thePayDataApi;
-
-	//...
-
-	public function actionOnlineConfirmation(int $cartId): void {
-		$returnedPayment = $this->tpReturnedPayment->create();
-
-		try {
-			if ($returnedPayment->verifySignature()) {
-				if (in_array($returnedPayment->getStatus(), [
-					ReturnedPayment::STATUS_OK,
-					ReturnedPayment::STATUS_WAITING,
-				], TRUE)) {
-					//Demo gate doesn't allow active check...
-					if ($this->thePayDataApi->getMerchantConfig()->isDemo()) {
-						//Do not load thePayDataApi->getPayment
-
-						if (bccomp(number_format($returnedPayment->getValue(), 2, '.', ''), '1000.00', 2) === 0) {
-							// everything is ok
-						}
-					}
-					else {
-						$paymentId = $returnedPayment->getPaymentId();
-						$payment = $this->thePayDataApi->getPayment($paymentId);
-
-						if (bccomp(number_format($payment->getPayment()->getValue(), 2, '.', ''), '1000.00', 2) === 0) {
-							// everything is ok
-						}
-					}
-				}
-			}
-		}
-		catch (InvalidSignatureException $e) {
-			// TODO handle invalid request signature
+		if ($payment->wasPaid()) {
+			// payment was successful
 		}
 	}
+
 }
 ```
-
 
 ## Official documentation
 
-You can find an official documentation with examples here [https://www.thepay.cz/ke-stazeni/](https://www.thepay.cz/ke-stazeni/)
+- [ThePay API Client](https://github.com/ThePay/api-client)
+- [ThePay API Documentation](https://thepay.docs.apiary.io/)
